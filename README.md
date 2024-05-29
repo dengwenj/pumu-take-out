@@ -21,3 +21,10 @@
 * knife4j 是为 java mvc 框架集成 Swagger 生成 API 文档的增强解决方案
 * 1、Yapi 是设计阶段使用的工具，管理和维护接口
 * 2、Swagger 在开发阶段使用的框架，帮助后端开发人员做后端的接口测试
+
+## Swagger 常用注解
+* 通过注解可以控制生成的接口文档，使接口文档拥有更好的可读性，常用注解如下
+* @Api：用在类上，例如 Controller，表示对类的说明
+* @ApiModel：用在类上，例如 entity、DTO、VO
+* @ApiModelProperty：用在属性上，描述属性信息
+* @ApiOperation：用在方法上，例如 Controller 的方法，说明方法的用途、作用
