@@ -5,6 +5,6 @@
 <mapper namespace="vip.dengwj.mapper.EmpMapper">
 <!--    根据用户名和密码查询员工-->
     <select id="getEmpByUsernameAndPassword" resultType="vip.dengwj.entity.EmpEntity">
-        select * from emp where username = #{username} and password = #{password}
+        select * from emp where username = #{username}
     </select>
 </mapper>
