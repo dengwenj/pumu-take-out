@@ -10,3 +10,8 @@
 
 ## pumu-take-service
 * 该子模块中存放的是配置文件、配置类、拦截器、controller、service、mapper、启动类等
+
+## nginx 反向代理的好处
+* 提高访问速度
+* 进行负载均衡
+* 保证后端服务安全

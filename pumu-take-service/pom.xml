@@ -41,6 +41,20 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+<!--        用 common 模块的文件-->
+        <dependency>
+            <groupId>vip.dengwj</groupId>
+            <artifactId>pumu-take-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+<!--        用 pojo 模块的文件-->
+        <dependency>
+            <groupId>vip.dengwj</groupId>
+            <artifactId>pumu-take-pojo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

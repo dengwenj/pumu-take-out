@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.dengwj.mapper.EmpMapper">
+<!--    根据用户名和密码查询员工-->
+    <select id="getEmpByUsernameAndPassword" resultType="vip.dengwj.entity.EmpEntity">
+        select * from emp where username = #{username} and password = #{password}
+    </select>
+</mapper>
