@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "员工对象")
-public class EmpDTO implements Serializable {
+public class   EmpDTO implements Serializable {
     @ApiModelProperty("唯一 id")
     private Long id;
 
