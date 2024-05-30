@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import vip.dengwj.constant.JWTConstant;
+import vip.dengwj.context.BaseContext;
 import vip.dengwj.properties.JWTProperties;
 import vip.dengwj.utils.JWTUtils;
 
@@ -39,7 +40,8 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         try {
             Map<String, Object> map = JWTUtils.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long empId = Long.valueOf(map.get(JWTConstant.EMP_ID).toString());
-            log.info("当前员工id：{}", empId);
+            // 放到当前线程的局部变量
+            BaseContext.set(empId);
             //3、通过，放行
             return true;
         } catch (Exception ex) {

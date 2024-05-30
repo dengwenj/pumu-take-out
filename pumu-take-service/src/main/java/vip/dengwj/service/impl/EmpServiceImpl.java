@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import vip.dengwj.constant.PasswordConstant;
 import vip.dengwj.constant.StatusConstant;
+import vip.dengwj.context.BaseContext;
 import vip.dengwj.dto.EmpDTO;
 import vip.dengwj.entity.EmpEntity;
 import vip.dengwj.mapper.EmpMapper;
@@ -36,10 +37,14 @@ public class EmpServiceImpl implements EmpService {
         empEntity.setCreateTime(LocalDateTime.now());
         empEntity.setUpdateTime(LocalDateTime.now());
 
-        // TODO 后续修改用户 id
-        empEntity.setCreateUser(10L);
-        empEntity.setUpdateUser(10L);
+        // 获取当前线程的局部变量
+        Long empId = BaseContext.get();
+        empEntity.setCreateUser(empId);
+        empEntity.setUpdateUser(empId);
 
         empMapper.saveEmp(empEntity);
+
+        // 移除
+        BaseContext.remove();
     }
 }
