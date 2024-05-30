@@ -3,8 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vip.dengwj.mapper.EmpMapper">
-<!--    根据用户名和密码查询员工-->
+    <!--    新增员工-->
+    <insert id="saveEmp">
+        insert into emp (name, username, password, phone, sex, id_number, status, create_time, update_time,
+                         create_user, update_user)
+        values (#{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}, #{createTime},
+                #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+    <!--    根据用户名和密码查询员工-->
     <select id="getEmpByUsernameAndPassword" resultType="vip.dengwj.entity.EmpEntity">
-        select * from emp where username = #{username}
+        select *
+        from emp
+        where username = #{username}
     </select>
 </mapper>

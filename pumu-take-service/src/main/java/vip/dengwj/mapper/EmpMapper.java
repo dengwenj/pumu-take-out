@@ -8,4 +8,7 @@ import vip.dengwj.entity.EmpEntity;
 public interface EmpMapper {
     // 根据用户名和密码获取员工
     EmpEntity getEmpByUsernameAndPassword(EmpLoginDTO empLoginDTO);
+
+    // 新增员工
+    void saveEmp(EmpEntity empEntity);
 }

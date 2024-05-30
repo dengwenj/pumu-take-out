@@ -28,3 +28,6 @@
 * @ApiModel：用在类上，例如 entity、DTO、VO
 * @ApiModelProperty：用在属性上，描述属性信息
 * @ApiOperation：用在方法上，例如 Controller 的方法，说明方法的用途、作用
+
+## 员工管理
+* 当前端提交的数据和实体类中对应的属性差别比较大时，建议使用 DTO 来封装数据
