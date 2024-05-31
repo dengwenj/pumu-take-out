@@ -1,18 +1,22 @@
 package vip.dengwj.service.impl;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vip.dengwj.constant.MessageConstant;
 import vip.dengwj.constant.StatusConstant;
 import vip.dengwj.context.BaseContext;
 import vip.dengwj.dto.CategoryDTO;
 import vip.dengwj.dto.CategoryQueryDTo;
 import vip.dengwj.entity.CategoryEntity;
+import vip.dengwj.exception.BaseException;
 import vip.dengwj.mapper.CategoryMapper;
 import vip.dengwj.service.CategoryService;
 import vip.dengwj.vo.PageVO;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -87,5 +91,18 @@ public class CategoryServiceImpl implements CategoryService {
             .build();
 
         categoryMapper.update(categoryEntity);
+    }
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    @Override
+    public List<CategoryEntity> getListByType(Integer type) {
+        if (type == null) {
+            throw new BaseException("分类类型为空");
+        }
+        return categoryMapper.getListByType(type);
     }
 }

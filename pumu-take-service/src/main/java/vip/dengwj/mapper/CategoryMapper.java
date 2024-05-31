@@ -15,4 +15,6 @@ public interface CategoryMapper {
     Integer count(CategoryQueryDTo categoryQueryDTo);
 
     void update(CategoryEntity categoryEntity);
+
+    List<CategoryEntity> getListByType(Integer type);
 }

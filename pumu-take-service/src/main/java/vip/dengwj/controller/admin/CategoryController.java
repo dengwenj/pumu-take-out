@@ -13,6 +13,8 @@ import vip.dengwj.result.Result;
 import vip.dengwj.service.CategoryService;
 import vip.dengwj.vo.PageVO;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @Api(tags = "分类管理")
@@ -47,5 +49,13 @@ public class CategoryController {
     public Result startOrStop(@PathVariable Integer status, @PathVariable Long id ) {
         categoryService.startOrStop(status, id);
         return Result.success();
+    }
+
+    @GetMapping("/type")
+    @ApiOperation("根据类型查询分类")
+    public Result<List<CategoryEntity>> getListByType(Integer type) {
+        System.out.println("type:" + type);
+        List<CategoryEntity> list = categoryService.getListByType(type);
+        return Result.success(list);
     }
 }

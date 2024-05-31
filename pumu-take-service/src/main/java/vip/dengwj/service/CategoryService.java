@@ -5,6 +5,8 @@ import vip.dengwj.dto.CategoryQueryDTo;
 import vip.dengwj.entity.CategoryEntity;
 import vip.dengwj.vo.PageVO;
 
+import java.util.List;
+
 public interface CategoryService {
     // 新增分类
     void save(CategoryDTO categoryDTO);
@@ -16,4 +18,6 @@ public interface CategoryService {
     void update(CategoryDTO categoryDTO);
 
     void startOrStop(Integer status, Long id);
+
+    List<CategoryEntity> getListByType(Integer type);
 }
