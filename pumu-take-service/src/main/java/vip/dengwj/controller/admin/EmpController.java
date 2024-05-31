@@ -42,4 +42,18 @@ public class EmpController {
         empService.startOrStop(status, id);
         return  Result.success();
     }
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据 id 获取员工")
+    public Result<EmpEntity> getEmpById(@PathVariable Long id) {
+        EmpEntity empEntity = empService.findById(id);
+        return Result.success(empEntity);
+    }
+
+    @PutMapping
+    @ApiOperation("编辑员工")
+    public Result updateEmpById(@RequestBody EmpDTO empDTO) {
+        empService.updateById(empDTO);
+        return Result.success();
+    }
 }

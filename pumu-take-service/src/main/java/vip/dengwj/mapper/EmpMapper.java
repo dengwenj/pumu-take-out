@@ -25,4 +25,7 @@ public interface EmpMapper {
 
     // 更新员工
     void update(EmpEntity empEntity);
+
+    // 根据 id 获取员工
+    EmpEntity getEmpById(Long id);
 }

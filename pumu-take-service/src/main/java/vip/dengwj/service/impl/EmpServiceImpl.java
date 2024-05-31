@@ -96,4 +96,29 @@ public class EmpServiceImpl implements EmpService {
 
         empMapper.update(empEntity);
     }
+
+    /**
+     * 根据 id 获取员工
+     * @param id
+     * @return
+     */
+    @Override
+    public EmpEntity findById(Long id) {
+        return empMapper.getEmpById(id);
+    }
+
+    /**
+     * 根据 id 编辑员工
+     * @param empDTO
+     */
+    @Override
+    public void updateById(EmpDTO empDTO) {
+        EmpEntity empEntity = new EmpEntity();
+        BeanUtils.copyProperties(empDTO, empEntity);
+
+        empEntity.setUpdateTime(LocalDateTime.now());
+        empEntity.setUpdateUser(BaseContext.get());
+
+        empMapper.update(empEntity);
+    }
 }
