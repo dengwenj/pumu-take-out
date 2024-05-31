@@ -20,4 +20,6 @@ public interface CategoryService {
     void startOrStop(Integer status, Long id);
 
     List<CategoryEntity> getListByType(Integer type);
+
+    void delete(Long id);
 }

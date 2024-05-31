@@ -17,4 +17,6 @@ public interface CategoryMapper {
     void update(CategoryEntity categoryEntity);
 
     List<CategoryEntity> getListByType(Integer type);
+
+    void delete(Long id);
 }

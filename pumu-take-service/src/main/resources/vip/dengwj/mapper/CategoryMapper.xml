@@ -57,4 +57,9 @@
     <select id="getListByType" resultType="vip.dengwj.entity.CategoryEntity">
         select * from category where type = #{type}
     </select>
+
+<!--    删除分类-->
+    <delete id="delete">
+        delete from category where id = #{id};
+    </delete>
 </mapper>

@@ -58,4 +58,11 @@ public class CategoryController {
         List<CategoryEntity> list = categoryService.getListByType(type);
         return Result.success(list);
     }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation("删除分类")
+    public Result delete(@PathVariable Long id) {
+        categoryService.delete(id);
+        return Result.success();
+    }
 }
