@@ -9,4 +9,33 @@
         insert into category (type, name, sort, create_user, update_user)
         values (#{type}, #{name}, #{sort}, #{createUser}, #{updateUser})
     </insert>
+
+<!--    查询分类-->
+    <select id="page" resultType="vip.dengwj.entity.CategoryEntity">
+        select * from category
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+        order by sort desc
+        limit #{page}, #{pageSize}
+    </select>
+
+    <!--    查询总条数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+        from category
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
 </mapper>
