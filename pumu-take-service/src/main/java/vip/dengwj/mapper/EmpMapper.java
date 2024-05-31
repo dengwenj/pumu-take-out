@@ -2,8 +2,10 @@ package vip.dengwj.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import vip.dengwj.annotation.AutoFill;
 import vip.dengwj.dto.EmpLoginDTO;
 import vip.dengwj.entity.EmpEntity;
+import vip.dengwj.enun.InsertOrUpdate;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ public interface EmpMapper {
     EmpEntity getEmpByUsernameAndPassword(EmpLoginDTO empLoginDTO);
 
     // 新增员工
+    @AutoFill(InsertOrUpdate.INSERT)
     void saveEmp(EmpEntity empEntity);
 
     // 查询员工
@@ -24,6 +27,7 @@ public interface EmpMapper {
     Integer count(@Param("empQueryMap") Map<String, Object> empQueryMap);
 
     // 更新员工
+    @AutoFill(InsertOrUpdate.UPDATE)
     void update(EmpEntity empEntity);
 
     // 根据 id 获取员工

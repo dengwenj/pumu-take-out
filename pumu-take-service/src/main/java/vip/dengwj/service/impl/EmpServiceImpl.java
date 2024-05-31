@@ -15,7 +15,6 @@ import vip.dengwj.service.EmpService;
 import vip.dengwj.utils.ObjectToMapUtils;
 import vip.dengwj.vo.PageVO;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -39,14 +38,6 @@ public class EmpServiceImpl implements EmpService {
         empEntity.setPassword(password);
 
         empEntity.setStatus(StatusConstant.ENABLE);
-
-        empEntity.setCreateTime(LocalDateTime.now());
-        empEntity.setUpdateTime(LocalDateTime.now());
-
-        // 获取当前线程的局部变量
-        Long empId = BaseContext.get();
-        empEntity.setCreateUser(empId);
-        empEntity.setUpdateUser(empId);
 
         empMapper.saveEmp(empEntity);
 
@@ -90,8 +81,6 @@ public class EmpServiceImpl implements EmpService {
         EmpEntity empEntity = EmpEntity.builder()
             .id(id)
             .status(status)
-            .updateTime(LocalDateTime.now())
-            .updateUser(BaseContext.get())
             .build();
 
         empMapper.update(empEntity);
@@ -115,9 +104,6 @@ public class EmpServiceImpl implements EmpService {
     public void updateById(EmpDTO empDTO) {
         EmpEntity empEntity = new EmpEntity();
         BeanUtils.copyProperties(empDTO, empEntity);
-
-        empEntity.setUpdateTime(LocalDateTime.now());
-        empEntity.setUpdateUser(BaseContext.get());
 
         empMapper.update(empEntity);
     }

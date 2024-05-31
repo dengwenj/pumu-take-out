@@ -31,10 +31,6 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryEntity categoryEntity = new CategoryEntity();
         BeanUtils.copyProperties(categoryDTO, categoryEntity);
 
-        Long empId = BaseContext.get();
-        categoryEntity.setCreateUser(empId);
-        categoryEntity.setUpdateUser(empId);
-
         categoryMapper.save(categoryEntity);
     }
 
@@ -60,9 +56,6 @@ public class CategoryServiceImpl implements CategoryService {
     public void update(CategoryDTO categoryDTO) {
         CategoryEntity categoryEntity = new CategoryEntity();
         BeanUtils.copyProperties(categoryDTO, categoryEntity);
-
-        categoryEntity.setUpdateUser(BaseContext.get());
-        categoryEntity.setUpdateTime(LocalDateTime.now());
 
         categoryMapper.update(categoryEntity);
     }

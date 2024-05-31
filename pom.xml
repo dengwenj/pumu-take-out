@@ -70,6 +70,12 @@
                 <version>${knife4j-spring-boot-starter.version}</version>
             </dependency>
 
+<!--            aop-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot-starter-web.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
