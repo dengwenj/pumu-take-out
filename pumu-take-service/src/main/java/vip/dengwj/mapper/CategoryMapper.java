@@ -13,4 +13,6 @@ public interface CategoryMapper {
     List<CategoryEntity> page(CategoryQueryDTo categoryQueryDTo);
 
     Integer count(CategoryQueryDTo categoryQueryDTo);
+
+    void update(CategoryEntity categoryEntity);
 }

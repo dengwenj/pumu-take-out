@@ -9,11 +9,10 @@ import vip.dengwj.dto.CategoryQueryDTo;
 import vip.dengwj.entity.CategoryEntity;
 import vip.dengwj.mapper.CategoryMapper;
 import vip.dengwj.service.CategoryService;
-import vip.dengwj.utils.ObjectToMapUtils;
 import vip.dengwj.vo.PageVO;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -48,5 +47,20 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryEntity> list = categoryMapper.page(categoryQueryDTo);
 
         return new PageVO<>(count, list);
+    }
+
+    /**
+     * 更新分类
+     * @param categoryDTO
+     */
+    @Override
+    public void update(CategoryDTO categoryDTO) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        BeanUtils.copyProperties(categoryDTO, categoryEntity);
+
+        categoryEntity.setUpdateUser(BaseContext.get());
+        categoryEntity.setUpdateTime(LocalDateTime.now());
+
+        categoryMapper.update(categoryEntity);
     }
 }

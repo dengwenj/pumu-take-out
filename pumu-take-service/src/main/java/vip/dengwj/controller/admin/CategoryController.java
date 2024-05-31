@@ -1,6 +1,7 @@
 package vip.dengwj.controller.admin;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,12 @@ public class CategoryController {
     public Result<PageVO<CategoryEntity>> page(CategoryQueryDTo categoryQueryDTo) throws IllegalAccessException {
         PageVO<CategoryEntity> data = categoryService.page(categoryQueryDTo);
         return Result.success(data);
+    }
+
+    @PostMapping("/update")
+    @ApiOperation("更新分类")
+    public Result update(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.update(categoryDTO);
+        return Result.success();
     }
 }

@@ -11,4 +11,7 @@ public interface CategoryService {
 
     // 分类查询
     PageVO<CategoryEntity> page(CategoryQueryDTo categoryQueryDTo) throws IllegalAccessException;
+
+    // 更新分类
+    void update(CategoryDTO categoryDTO);
 }
