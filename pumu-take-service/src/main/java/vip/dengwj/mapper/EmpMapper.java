@@ -3,7 +3,6 @@ package vip.dengwj.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import vip.dengwj.dto.EmpLoginDTO;
-import vip.dengwj.dto.EmpQueryDTO;
 import vip.dengwj.entity.EmpEntity;
 
 import java.util.List;
@@ -22,5 +21,5 @@ public interface EmpMapper {
     List<EmpEntity> page(Map<String, Object> empQueryMap, int currentPage, int pageSize);
 
     // 获取总条数
-    Integer count(EmpQueryDTO empQueryDTO);
+    Integer count(@Param("empQueryMap") Map<String, Object> empQueryMap);
 }

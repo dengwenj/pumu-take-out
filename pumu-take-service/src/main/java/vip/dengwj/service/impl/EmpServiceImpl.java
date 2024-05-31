@@ -62,10 +62,10 @@ public class EmpServiceImpl implements EmpService {
         Integer pageSize = empQueryDTO.getPageSize();
         int start = (page - 1) * pageSize;
 
-        Integer count = empMapper.count(empQueryDTO);
         Map<String, Object> empQueryMap = ObjectToMapUtils.objectToMap(empQueryDTO);
         empQueryMap.remove("page");
         empQueryMap.remove("pageSize");
+        Integer count = empMapper.count(empQueryMap);
         List<EmpEntity> empList = empMapper.page(empQueryMap, start, pageSize);
 
         PageVO<EmpEntity> pageVO = new PageVO<>();

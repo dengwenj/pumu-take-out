@@ -17,23 +17,35 @@
         where username = #{username}
     </select>
 
+<!--    封装-->
+    <sql id="foreachCommon">
+        <where>
+            <foreach collection="empQueryMap" item="value" index="key">
+                <if test="value != null and value != ''">
+                    ${fragment}
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
     <!--    查询员工-->
     <select id="page" resultType="vip.dengwj.entity.EmpEntity">
         select id, name, username, phone, sex, id_number, status, create_time, update_time, create_user,
         update_user
         from emp
-        <where>
-            <foreach collection="empQueryMap" item="value" index="key">
-                <if test="value != null and value != ''">
-                    and #{key} like concat('%', #{value}, '%')
-                </if>
-            </foreach>
-        </where>
+        <include refid="foreachCommon">
+            <property name="fragment" value="and #{key} like concat('%', #{value}, '%')"/>
+        </include>
+        order by create_time desc
         limit #{currentPage}, #{pageSize}
     </select>
 
 <!--    获取总条数-->
     <select id="count" resultType="java.lang.Integer">
-        select count(*) from emp where name = #{name};
+        select count(*)
+        from emp
+        <include refid="foreachCommon">
+            <property name="fragment" value="and #{key} = #{value}"/>
+        </include>
     </select>
 </mapper>
