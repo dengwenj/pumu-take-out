@@ -3,6 +3,7 @@ package vip.dengwj.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vip.dengwj.constant.StatusConstant;
 import vip.dengwj.context.BaseContext;
 import vip.dengwj.dto.CategoryDTO;
 import vip.dengwj.dto.CategoryQueryDTo;
@@ -13,6 +14,7 @@ import vip.dengwj.vo.PageVO;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -60,6 +62,29 @@ public class CategoryServiceImpl implements CategoryService {
 
         categoryEntity.setUpdateUser(BaseContext.get());
         categoryEntity.setUpdateTime(LocalDateTime.now());
+
+        categoryMapper.update(categoryEntity);
+    }
+
+    /**
+     * 启用禁用分类
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        if (Objects.equals(status, StatusConstant.ENABLE)) {
+            status = StatusConstant.DISABLE;
+        } else {
+            status = StatusConstant.ENABLE;
+        }
+
+        CategoryEntity categoryEntity = CategoryEntity.builder()
+            .id(id)
+            .status(status)
+            .updateTime(LocalDateTime.now())
+            .updateUser(BaseContext.get())
+            .build();
 
         categoryMapper.update(categoryEntity);
     }

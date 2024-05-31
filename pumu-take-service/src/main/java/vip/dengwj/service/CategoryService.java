@@ -14,4 +14,6 @@ public interface CategoryService {
 
     // 更新分类
     void update(CategoryDTO categoryDTO);
+
+    void startOrStop(Integer status, Long id);
 }
