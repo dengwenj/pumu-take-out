@@ -22,4 +22,7 @@ public interface EmpMapper {
 
     // 获取总条数
     Integer count(@Param("empQueryMap") Map<String, Object> empQueryMap);
+
+    // 更新员工
+    void update(EmpEntity empEntity);
 }

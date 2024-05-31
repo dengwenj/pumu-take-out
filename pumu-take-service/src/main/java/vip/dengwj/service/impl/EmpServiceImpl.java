@@ -18,6 +18,7 @@ import vip.dengwj.vo.PageVO;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -72,5 +73,27 @@ public class EmpServiceImpl implements EmpService {
         pageVO.setTotal(count);
         pageVO.setRecords(empList);
         return pageVO;
+    }
+
+    /**
+     * 启用禁用员工
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        if (Objects.equals(status, StatusConstant.ENABLE)) {
+            status = StatusConstant.DISABLE;
+        } else {
+            status = StatusConstant.ENABLE;
+        }
+        EmpEntity empEntity = EmpEntity.builder()
+            .id(id)
+            .status(status)
+            .updateTime(LocalDateTime.now())
+            .updateUser(BaseContext.get())
+            .build();
+
+        empMapper.update(empEntity);
     }
 }
