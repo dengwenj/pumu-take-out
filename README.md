@@ -39,3 +39,8 @@
 * public void set(T value)：设置当前线程的线程局部变量的值
 * public T get()：返回当前线程所对应的线程局部变量的值
 * public void remove()：移除当前线程的线程局部变量
+
+## 日期转换
+* 方式一：在属性上加入注解，对日期进行格式化，@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+* 方式二：在 WebMvcConfiguration 中扩展 Spring MVC 的消息转换器，统一对日期类型进行格式处理
+* 消息转换器的作用：统一对后端返回给前端的数据统一进行转换的处理（比如：日期类型的格式化）

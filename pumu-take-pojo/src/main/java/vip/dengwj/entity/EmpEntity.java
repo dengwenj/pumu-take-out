@@ -1,5 +1,6 @@
 package vip.dengwj.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,9 +33,12 @@ public class EmpEntity {
     private String idNumber;
     @ApiModelProperty("员工状态")
     private Integer status;
+
     @ApiModelProperty("创建时间")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     @ApiModelProperty("更新时间")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
     @ApiModelProperty("创建人id")
     private Long createUser;
