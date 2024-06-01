@@ -30,6 +30,9 @@
             <if test="description != null and description != ''">
                 description = #{description},
             </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
             <if test="updateTime != null">
                 update_time = #{updateTime},
             </if>

@@ -18,4 +18,6 @@ public interface DishService {
     DishDTO findById(Long id);
 
     void update(DishDTO dishDTO);
+
+    void startOrStop(Integer status, Long id);
 }

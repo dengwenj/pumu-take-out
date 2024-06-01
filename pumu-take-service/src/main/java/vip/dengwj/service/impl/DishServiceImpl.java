@@ -129,4 +129,20 @@ public class DishServiceImpl implements DishService {
             dishFlavorMapper.insertBatch(dishDTO.getFlavors());
         }
     }
+
+    /**
+     * 菜品起售停售
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        DishEntity dishEntity = new DishEntity();
+        if (Objects.equals(status, StatusConstant.ENABLE)) {
+            dishEntity.setStatus(StatusConstant.DISABLE);
+        } else {
+            dishEntity.setStatus(StatusConstant.ENABLE);
+        }
+        dishEntity.setId(id);
+
+        dishMapper.update(dishEntity);
+    }
 }

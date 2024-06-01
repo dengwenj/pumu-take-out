@@ -52,4 +52,11 @@ public class DishController {
         dishService.update(dishDTO);
         return Result.success();
     }
+
+    @ApiOperation("菜品起售停售")
+    @PutMapping("/{status}/{id}")
+    public Result updateStatus(@PathVariable Integer status, @PathVariable Long id) {
+        dishService.startOrStop(status, id);
+        return Result.success();
+    }
 }
