@@ -11,7 +11,7 @@
                 #{createUser}, #{updateUser})
     </insert>
 
-<!--    查询菜品，左外连接-->
+    <!--    查询菜品，左外连接-->
     <select id="pageQuery" resultType="vip.dengwj.vo.DishVo">
         select d.id,
                d.name,
@@ -55,4 +55,14 @@
             </if>
         </where>
     </select>
+
+<!--    通过 ids 获取菜品-->
+    <select id="getDisByIds" resultType="vip.dengwj.entity.DishEntity">
+        select * from dish where id in (#{ids})
+    </select>
+
+    <!--    删除菜品-->
+    <delete id="deleteBatch">
+        delete from dish where id in (#{ids})
+    </delete>
 </mapper>

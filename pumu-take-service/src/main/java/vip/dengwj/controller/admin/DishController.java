@@ -31,4 +31,11 @@ public class DishController {
         PageVO<DishVo> page = dishService.page(dishQueryDTO);
         return Result.success(page);
     }
+
+    @ApiOperation("删除菜品")
+    @DeleteMapping
+    public Result delete(@RequestParam String ids) {
+        dishService.deleteBatch(ids);
+        return Result.success();
+    }
 }

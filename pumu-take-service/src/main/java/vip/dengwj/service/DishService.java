@@ -11,4 +11,7 @@ public interface DishService {
 
     // 查询菜品
     PageVO<DishVo> page(DishQueryDTO dishQueryDTO);
+
+    // 删除菜品
+    void deleteBatch(String ids);
 }

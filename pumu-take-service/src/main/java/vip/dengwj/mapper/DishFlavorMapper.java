@@ -9,4 +9,7 @@ import java.util.List;
 public interface DishFlavorMapper {
     // foreach 批量添加
     void insertBatch(List<DishFlavorEntity>  dishFlavorEntities);
+
+    // 通过菜品 id 删除 菜品口味
+    void deleteByDishId(String ids);
 }

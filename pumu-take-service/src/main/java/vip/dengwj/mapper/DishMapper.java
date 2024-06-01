@@ -28,4 +28,14 @@ public interface DishMapper {
      * 获取菜品总数
      */
     Integer count(DishQueryDTO dishQueryDTO);
+
+    /**
+     * 删除菜品
+     */
+    void deleteBatch(String ids);
+
+    /**
+     * 通过菜品 id 获取菜品，批量获取
+     */
+    List<DishEntity> getDisByIds(String ids);
 }
