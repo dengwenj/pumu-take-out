@@ -40,5 +40,14 @@ public interface DishMapper {
      */
     List<DishEntity> getDisByIds(String ids);
 
+    /**
+     * 通过菜品 id 获取数据
+     */
     DishDTO findById(Long id);
+
+    /**
+     * 更新菜品
+     */
+    @AutoFill(InsertOrUpdate.UPDATE)
+    void update(DishEntity dishEntity);
 }

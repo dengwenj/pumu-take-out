@@ -11,6 +11,35 @@
                 #{createUser}, #{updateUser})
     </insert>
 
+<!--    更新菜品-->
+    <update id="update">
+        update dish
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
     <!--    查询菜品，左外连接-->
     <select id="pageQuery" resultType="vip.dengwj.vo.DishVo">
         select d.id,

@@ -44,10 +44,10 @@ public class DishServiceImpl implements DishService {
         List<DishFlavorEntity> flavors = dishDTO.getFlavors();
         if (flavors != null && !flavors.isEmpty()) {
             for (DishFlavorEntity flavor : flavors) flavor.setDishId(id);
-        }
 
-        // 添加菜品口味
-        dishFlavorMapper.insertBatch(flavors);
+            // 添加菜品口味
+            dishFlavorMapper.insertBatch(flavors);
+        }
     }
 
     /**
@@ -102,5 +102,31 @@ public class DishServiceImpl implements DishService {
         dishDTO.setFlavors(dishFlavors);
 
         return dishDTO;
+    }
+
+    /**
+     * 更新菜品
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(DishDTO dishDTO) {
+        DishEntity dishEntity = new DishEntity();
+        BeanUtils.copyProperties(dishDTO, dishEntity);
+
+        // 修改菜品表
+        dishMapper.update(dishEntity);
+
+        // 先删除再重新插入
+        // 根据菜品 id 删除菜品口味表
+        dishFlavorMapper.deleteByDishId(dishEntity.getId() + "");
+
+        // 重新插入
+        Long id = dishEntity.getId();
+        List<DishFlavorEntity> flavors = dishDTO.getFlavors();
+        if (flavors != null && !flavors.isEmpty()) {
+            for (DishFlavorEntity flavor : flavors) flavor.setDishId(id);
+
+            dishFlavorMapper.insertBatch(dishDTO.getFlavors());
+        }
     }
 }

@@ -45,4 +45,11 @@ public class DishController {
         DishDTO data = dishService.findById(id);
         return Result.success(data);
     }
+
+    @ApiOperation("编辑菜品")
+    @PutMapping
+    public Result update(@RequestBody DishDTO dishDTO) {
+        dishService.update(dishDTO);
+        return Result.success();
+    }
 }
