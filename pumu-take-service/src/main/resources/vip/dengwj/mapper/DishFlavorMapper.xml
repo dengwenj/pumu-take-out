@@ -15,4 +15,9 @@
     <delete id="deleteByDishId">
         delete from dish_flavor where dish_id in (#{ids})
     </delete>
+
+<!--    通过菜品 id 获取菜品口味-->
+    <select id="getListByDishId" resultType="vip.dengwj.entity.DishFlavorEntity">
+        select * from dish_flavor where dish_id = #{dishId}
+    </select>
 </mapper>

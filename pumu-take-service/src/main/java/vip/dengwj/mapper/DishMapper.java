@@ -2,6 +2,7 @@ package vip.dengwj.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import vip.dengwj.annotation.AutoFill;
+import vip.dengwj.dto.DishDTO;
 import vip.dengwj.dto.DishQueryDTO;
 import vip.dengwj.entity.DishEntity;
 import vip.dengwj.enun.InsertOrUpdate;
@@ -38,4 +39,6 @@ public interface DishMapper {
      * 通过菜品 id 获取菜品，批量获取
      */
     List<DishEntity> getDisByIds(String ids);
+
+    DishDTO findById(Long id);
 }

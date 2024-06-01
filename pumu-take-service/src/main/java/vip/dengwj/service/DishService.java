@@ -14,4 +14,6 @@ public interface DishService {
 
     // 删除菜品
     void deleteBatch(String ids);
+
+    DishDTO findById(Long id);
 }

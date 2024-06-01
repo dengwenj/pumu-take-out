@@ -38,4 +38,11 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+
+    @ApiOperation("根据菜品 id 获取数据")
+    @GetMapping("/{id}")
+    public Result<DishDTO> findById(@PathVariable Long id) {
+        DishDTO data = dishService.findById(id);
+        return Result.success(data);
+    }
 }

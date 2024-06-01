@@ -12,4 +12,7 @@ public interface DishFlavorMapper {
 
     // 通过菜品 id 删除 菜品口味
     void deleteByDishId(String ids);
+
+    // 通过菜品 id 获取菜品口味
+    List<DishFlavorEntity> getListByDishId(Long dishId);
 }
