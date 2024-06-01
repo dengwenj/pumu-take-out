@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import vip.dengwj.constant.MessageConstant;
 import vip.dengwj.exception.BaseException;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.CommonService;
@@ -34,7 +35,7 @@ public class CommonController {
         try {
             upload = commonService.upload(file);
         } catch (IOException e) {
-            throw new BaseException("上传失败");
+            throw new BaseException(MessageConstant.UPLOAD_FAILED);
         }
 
         return Result.success(upload);
