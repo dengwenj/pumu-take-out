@@ -2,7 +2,6 @@ package vip.dengwj.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import vip.dengwj.annotation.AutoFill;
-import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealQueryDTO;
 import vip.dengwj.entity.SetmealEntity;
 import vip.dengwj.enun.InsertOrUpdate;

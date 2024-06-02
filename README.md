@@ -44,3 +44,16 @@
 * 方式一：在属性上加入注解，对日期进行格式化，@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 * 方式二：在 WebMvcConfiguration 中扩展 Spring MVC 的消息转换器，统一对日期类型进行格式处理
 * 消息转换器的作用：统一对后端返回给前端的数据统一进行转换的处理（比如：日期类型的格式化）
+
+## Redis
+* Redis 是一个基于内存的 key-value 结构数据库
+* 基于内存存储，读写性能高
+* 适合存储热点数据（热点商品、资讯、新闻）
+
+## Redis 数据类型
+* Redis 存储的事 key-value 结构的数据，其中 key 是字符串类型，value 有5种常用的数据类型：
+* 1、字符串 string：普通字符串，Redis 中最简单的数据类型
+* 2、哈希 hash：也叫散列，类似 java 中的 HashMap 结构
+* 3、列表 list：按照插入顺序排序，可以有重复元素，类似 java 中的 LinkedLink
+* 4、集合 set：无序集合，没有重复元素，类似 java 中的 HashSet
+* 5、有序集合 sorted set / zset：集合中每个元素关联一个分数(score)，根据分数升序排序，没有重复元素
