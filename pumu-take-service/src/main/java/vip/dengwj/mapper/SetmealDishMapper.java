@@ -12,4 +12,7 @@ public interface SetmealDishMapper {
 
     // 批量新增套餐菜品
     void insertBatch(List<SetmealDishEntity> setmealDishEntities);
+
+    // 根据套餐 id 批量删除数据
+    void deleteBySetmealIds(String SetmealIds);
 }

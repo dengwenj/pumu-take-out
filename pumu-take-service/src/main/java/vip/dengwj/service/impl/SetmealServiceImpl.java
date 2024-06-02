@@ -4,11 +4,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vip.dengwj.constant.MessageConstant;
+import vip.dengwj.constant.StatusConstant;
 import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealDishDTO;
 import vip.dengwj.dto.SetmealQueryDTO;
 import vip.dengwj.entity.SetmealDishEntity;
 import vip.dengwj.entity.SetmealEntity;
+import vip.dengwj.exception.BaseException;
 import vip.dengwj.mapper.SetmealDishMapper;
 import vip.dengwj.mapper.SetmealMapper;
 import vip.dengwj.service.SetmealService;
@@ -17,6 +20,7 @@ import vip.dengwj.vo.SetmealVO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class SetmealServiceImpl implements SetmealService {
@@ -77,5 +81,27 @@ public class SetmealServiceImpl implements SetmealService {
         List<SetmealVO> list = setmealMapper.page(setmealQueryDTO);
 
         return new PageVO<>(count, list);
+    }
+
+    /**
+     * 批量删除套餐
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteBatch(String ids) {
+        // 起售中的不能删除
+        // 根据 ids 批量查询数据
+        List<SetmealVO> setmeals = setmealMapper.getSetmealByIds(ids);
+        for (SetmealVO s : setmeals) {
+            if (Objects.equals(s.getStatus(), StatusConstant.ENABLE)) {
+                throw new BaseException(MessageConstant.SETMEAL_ON_SALE);
+            }
+        }
+
+        // 套餐菜品关系表中根据套餐 id 也要删除
+        setmealDishMapper.deleteBySetmealIds(ids);
+
+        // 删除套餐
+        setmealMapper.deleteByIds(ids);
     }
 }

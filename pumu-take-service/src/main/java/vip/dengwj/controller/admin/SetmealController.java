@@ -1,6 +1,7 @@
 package vip.dengwj.controller.admin;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,12 @@ public class SetmealController {
     public Result<PageVO<SetmealVO>> page(SetmealQueryDTO setmealQueryDTO) {
         PageVO<SetmealVO> page = setmealService.page(setmealQueryDTO);
         return Result.success(page);
+    }
+
+    @ApiOperation("删除套餐")
+    @DeleteMapping
+    public Result deleteBatch(String ids) {
+        setmealService.deleteBatch(ids);
+        return Result.success();
     }
 }

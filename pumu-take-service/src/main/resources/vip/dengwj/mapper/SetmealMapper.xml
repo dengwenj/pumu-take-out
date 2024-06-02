@@ -11,7 +11,12 @@
                 #{createUser}, #{updateUser})
     </insert>
 
-<!--    查询套餐-->
+<!--    批量删除套餐-->
+    <delete id="deleteByIds">
+        delete from setmeal where id in (#{ids})
+    </delete>
+
+    <!--    查询套餐-->
     <select id="page" resultType="vip.dengwj.vo.SetmealVO">
         select s.id,
                s.name,
@@ -53,5 +58,10 @@
                 and status = #{status}
             </if>
         </where>
+    </select>
+
+<!--    根据 ids 批量查询数据-->
+    <select id="getSetmealByIds" resultType="vip.dengwj.vo.SetmealVO">
+        select * from setmeal where id in (#{ids})
     </select>
 </mapper>

@@ -19,4 +19,10 @@ public interface SetmealMapper {
 
     // 通过查询条件获取数量
     Integer count(SetmealQueryDTO setmealQueryDTO);
+
+    // 根据 id 查询套餐,批量查询
+    List<SetmealVO> getSetmealByIds(String ids);
+
+    // 批量删除套餐
+    void deleteByIds(String ids);
 }

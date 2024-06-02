@@ -10,4 +10,7 @@ public interface SetmealService {
 
     // 分页查询
     PageVO<SetmealVO> page(SetmealQueryDTO setmealQueryDTO);
+
+    // 批量删除套餐
+    void deleteBatch(String ids);
 }
