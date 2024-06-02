@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.*;
 
+import java.util.concurrent.TimeUnit;
+
 @SpringBootTest
 class PumuTakeServiceApplicationTests {
     @Autowired
@@ -22,5 +24,25 @@ class PumuTakeServiceApplicationTests {
         ListOperations<String, Object> stringObjectListOperations = redisTemplate.opsForList();
         SetOperations<String, Object> stringObjectSetOperations = redisTemplate.opsForSet();
         ZSetOperations<String, Object> stringObjectZSetOperations = redisTemplate.opsForZSet();
+    }
+
+    /**
+     * spring 操作 redis 字符串
+     */
+    @Test
+    public void testStringRedisTemplate() {
+        // set get setex setnx
+        // 设置
+        redisTemplate.opsForValue().set("hello", "world");
+        System.out.println(redisTemplate.opsForValue().get("hello"));
+
+        // 3分钟后过期，删除
+        redisTemplate.opsForValue().set("code", "123456", 3, TimeUnit.MINUTES);
+        System.out.println(redisTemplate.opsForValue().get("code"));
+
+        // 没有该 key 才设置
+        redisTemplate.opsForValue().setIfAbsent("pp", "皮皮");
+        System.out.println(redisTemplate.opsForValue().get("pp"));
+        redisTemplate.opsForValue().setIfAbsent("pp", "啤啤");
     }
 }
