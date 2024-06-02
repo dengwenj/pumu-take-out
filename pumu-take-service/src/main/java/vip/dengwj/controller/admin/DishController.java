@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vip.dengwj.dto.DishDTO;
 import vip.dengwj.dto.DishQueryDTO;
+import vip.dengwj.entity.DishEntity;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.DishService;
 import vip.dengwj.vo.DishVo;
 import vip.dengwj.vo.PageVO;
+
+import java.util.List;
 
 @RestController
 @Api(tags = "菜品接口")
@@ -58,5 +61,12 @@ public class DishController {
     public Result updateStatus(@PathVariable Integer status, @PathVariable Long id) {
         dishService.startOrStop(status, id);
         return Result.success();
+    }
+
+    @ApiOperation("根据分类 id 查询菜品")
+    @GetMapping("/getDishByCategoryId")
+    public Result<List<DishEntity>> getDishByCategoryId(Long categoryId) {
+        List<DishEntity> data = dishService.getDishByCategoryId(categoryId);
+        return Result.success(data);
     }
 }

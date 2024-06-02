@@ -18,6 +18,7 @@ import vip.dengwj.service.DishService;
 import vip.dengwj.vo.DishVo;
 import vip.dengwj.vo.PageVO;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -144,5 +145,13 @@ public class DishServiceImpl implements DishService {
         dishEntity.setId(id);
 
         dishMapper.update(dishEntity);
+    }
+
+    /**
+     * 根据分类 id 查询菜品
+     */
+    @Override
+    public List<DishEntity> getDishByCategoryId(Long categoryId) {
+        return dishMapper.getDishByCategoryId(categoryId);
     }
 }
