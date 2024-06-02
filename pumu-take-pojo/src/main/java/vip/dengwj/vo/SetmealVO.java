@@ -33,7 +33,7 @@ public class SetmealVO {
     private Long categoryId;
 
     @ApiModelProperty("分类名称")
-    private Long categoryName;
+    private String categoryName;
 
     @ApiModelProperty("最后操作时间")
     private LocalDateTime updateTime;

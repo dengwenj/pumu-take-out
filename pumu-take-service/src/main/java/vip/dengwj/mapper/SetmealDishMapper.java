@@ -15,4 +15,7 @@ public interface SetmealDishMapper {
 
     // 根据套餐 id 批量删除数据
     void deleteBySetmealIds(String SetmealIds);
+
+    // 根据套餐 id 获取数据
+    List<SetmealDishEntity> findBySetmealId(Long setmealId);
 }

@@ -91,8 +91,8 @@ public class SetmealServiceImpl implements SetmealService {
     public void deleteBatch(String ids) {
         // 起售中的不能删除
         // 根据 ids 批量查询数据
-        List<SetmealVO> setmeals = setmealMapper.getSetmealByIds(ids);
-        for (SetmealVO s : setmeals) {
+        List<SetmealEntity> setmeals = setmealMapper.getSetmealByIds(ids);
+        for (SetmealEntity s : setmeals) {
             if (Objects.equals(s.getStatus(), StatusConstant.ENABLE)) {
                 throw new BaseException(MessageConstant.SETMEAL_ON_SALE);
             }
@@ -103,5 +103,42 @@ public class SetmealServiceImpl implements SetmealService {
 
         // 删除套餐
         setmealMapper.deleteByIds(ids);
+    }
+
+    /**
+     * 更新套餐
+     */
+    @Override
+    public void update(SetmealDTO setmealDTO) {
+
+    }
+
+    /**
+     * 根据 id 获取套餐
+     */
+    @Override
+    public SetmealDTO getSetmealById(Long id) {
+        List<SetmealEntity> list = setmealMapper.getSetmealByIds(id + "");
+        SetmealEntity setmealVO = list.get(0);
+
+        SetmealDTO setmealDTO = new SetmealDTO();
+        BeanUtils.copyProperties(setmealVO, setmealDTO);
+
+        // 根据套餐 id 获取套餐菜品数据
+        List<SetmealDishEntity> setmealDishList = setmealDishMapper.findBySetmealId(id);
+        List<SetmealDishDTO> setmealDishDTOList = new ArrayList<>();
+        setmealDishList.forEach((item) -> {
+            setmealDishDTOList.add(
+                SetmealDishDTO.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .price(item.getPrice())
+                .copies(item.getCopies())
+                .build()
+            );
+        });
+        setmealDTO.setSetmealDishDTOList(setmealDishDTOList);
+
+        return setmealDTO;
     }
 }

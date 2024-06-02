@@ -25,7 +25,7 @@
                s.image,
                s.status,
                s.update_time,
-               c.name
+               c.name categoryName
         from setmeal s
                  left join category c on s.category_id = c.id
         <where>
@@ -61,7 +61,7 @@
     </select>
 
 <!--    根据 ids 批量查询数据-->
-    <select id="getSetmealByIds" resultType="vip.dengwj.vo.SetmealVO">
+    <select id="getSetmealByIds" resultType="vip.dengwj.entity.SetmealEntity">
         select * from setmeal where id in (#{ids})
     </select>
 </mapper>

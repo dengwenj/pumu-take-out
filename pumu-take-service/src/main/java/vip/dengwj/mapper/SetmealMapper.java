@@ -21,7 +21,7 @@ public interface SetmealMapper {
     Integer count(SetmealQueryDTO setmealQueryDTO);
 
     // 根据 id 查询套餐,批量查询
-    List<SetmealVO> getSetmealByIds(String ids);
+    List<SetmealEntity> getSetmealByIds(String ids);
 
     // 批量删除套餐
     void deleteByIds(String ids);

@@ -3,6 +3,7 @@ package vip.dengwj.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "套餐菜品传递对象")
+@Builder
 public class SetmealDishDTO implements Serializable {
     @ApiModelProperty("菜品 id")
     private Long id;

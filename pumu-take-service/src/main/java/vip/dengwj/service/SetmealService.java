@@ -13,4 +13,10 @@ public interface SetmealService {
 
     // 批量删除套餐
     void deleteBatch(String ids);
+
+    // 更新套餐
+    void update(SetmealDTO setmealDTO);
+
+    // 根据 id 获取套餐
+    SetmealDTO getSetmealById(Long id);
 }
