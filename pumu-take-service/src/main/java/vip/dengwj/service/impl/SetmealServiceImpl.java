@@ -109,8 +109,30 @@ public class SetmealServiceImpl implements SetmealService {
      * 更新套餐
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void update(SetmealDTO setmealDTO) {
+        SetmealEntity setmealEntity = new SetmealEntity();
+        BeanUtils.copyProperties(setmealDTO, setmealEntity);
+        // 套餐更新
+        setmealMapper.update(setmealEntity);
 
+        // 套餐菜品关系表
+        // 先删除在插入
+        setmealDishMapper.deleteBySetmealIds(setmealDTO.getId() + "");
+
+        List<SetmealDishEntity> list = new ArrayList<>();
+        for (SetmealDishDTO setmealDishDTO : setmealDTO.getSetmealDishDTOList()) {
+            list.add(
+                SetmealDishEntity.builder()
+                    .setmealId(setmealDTO.getId())
+                    .dishId(setmealDishDTO.getId())
+                    .name(setmealDishDTO.getName())
+                    .price(setmealDishDTO.getPrice())
+                    .copies(setmealDishDTO.getCopies())
+                    .build()
+            );
+        }
+        setmealDishMapper.insertBatch(list);
     }
 
     /**

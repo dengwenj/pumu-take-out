@@ -2,6 +2,7 @@ package vip.dengwj.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import vip.dengwj.annotation.AutoFill;
+import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealQueryDTO;
 import vip.dengwj.entity.SetmealEntity;
 import vip.dengwj.enun.InsertOrUpdate;
@@ -25,4 +26,8 @@ public interface SetmealMapper {
 
     // 批量删除套餐
     void deleteByIds(String ids);
+
+    // 更新套餐
+    @AutoFill(InsertOrUpdate.UPDATE)
+    void update(SetmealEntity setmealEntity);
 }
