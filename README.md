@@ -153,3 +153,24 @@ sunion set ww
 -- 删除集合中一个或多个成员
 srem set 你好 啊
 ```
+
+## 有序集合操作命令
+* Redis 有序集合是 string 类型元素的集合，且不允许有重复成员。每个元素都会关联一个 double 类型的分数，常用命令：
+* zadd key score1 member1【score2 member2】：向有序集合添加一个或多个成员
+* zrange key start stop【withscores】：通过索引区间返回有序集合中指定区间内的成员
+* zincrby key increment member：有序集合中对指定成员的分数加上增量 increment
+* zrem key member【member1】：移除有序集合中的一个或多个成员
+```redis
+-- 有序集合操作命令
+-- 添加
+zadd zset1 1.3 a 1.5 b 1.7 c
+
+-- 通过索引区间查询数据
+zrange zset1 0 -1
+
+-- 对指定成员的分数增量
+zincrby zset1 1.1 a
+
+-- 移除一个或多个成员
+zrem zset1 a
+```
