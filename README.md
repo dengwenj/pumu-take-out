@@ -110,9 +110,6 @@ hvals student
 * rpop key：移除并获取列表最后一个元素
 * llen key：获取列表长度
 ```redis
--- 获取 hash 表中所有值
-hvals student
-
 -- 列表操作命令
 -- 插入
 lpush list 朴睦 李雷 韩梅梅
@@ -125,4 +122,34 @@ rpop list
 
 -- 获取长度
 llen list
+```
+
+## 集合操作命令
+* Redis set 是 string 类型的无序集合，集合成员是唯一的，集合中不能出现重复的数据，常用命令：
+* sadd key member1 【member2】：向集合添加一个或多个成员
+* smembers key：返回集合中的所有成员
+* scard key：获取集合的成员数
+* sinter key1【key2】：返回给定所有集合的交集
+* sunion key1【key2】：返回所有给定集合的并集
+* srem key member1【member2】：删除集合中一个或多个成员
+```redis
+-- 集合操作命令
+-- 向集合中添加成员
+sadd set 你好 世界 啊
+sadd ww 世界 好看
+
+-- 返回集合中所有元素
+smembers set
+
+-- 获取集合的成员数 3
+scard set
+
+-- 返回给定所有集合的交集 (世界)
+sinter set ww
+
+-- 返回所有给定集合的并集 (你好 世界 啊 好看)
+sunion set ww
+
+-- 删除集合中一个或多个成员
+srem set 你好 啊
 ```
