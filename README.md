@@ -76,3 +76,29 @@ setnx sex 男
 
 get sex
 ```
+
+## 哈希操作命令
+* Redis hash 是一个 string 类型的 field he value 的映射表，hash 特别适用于存储对象，常用命令：
+* hset key field value：将哈希表 key 中的字段 field 的值设为 value
+* hget key field：获取存储在哈希表中指定字段的值
+* hdel key field：删除存储在哈希表中的指定字段
+* hkeys key：获取哈希表中所有字段
+* hvals key：获取哈希表中所有值
+```redis
+-- 设置
+hset student name 朴睦
+hset student sex 男
+
+-- 获取
+hget student name
+hget student sex
+
+-- 删除
+hdel student sex
+
+-- 获取 hash 表中所有字段
+hkeys student
+
+-- 获取 hash 表中所有值
+hvals student
+```
