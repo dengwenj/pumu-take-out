@@ -6,11 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealDishDTO;
+import vip.dengwj.dto.SetmealQueryDTO;
 import vip.dengwj.entity.SetmealDishEntity;
 import vip.dengwj.entity.SetmealEntity;
 import vip.dengwj.mapper.SetmealDishMapper;
 import vip.dengwj.mapper.SetmealMapper;
 import vip.dengwj.service.SetmealService;
+import vip.dengwj.vo.PageVO;
+import vip.dengwj.vo.SetmealVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,5 +60,22 @@ public class SetmealServiceImpl implements SetmealService {
 
         // 套餐菜品表
         setmealDishMapper.insertBatch(setmealDishEntityList);
+    }
+
+    /**
+     * 分类查询
+     */
+    @Override
+    public PageVO<SetmealVO> page(SetmealQueryDTO setmealQueryDTO) {
+        Integer page = setmealQueryDTO.getPage();
+        Integer pageSize = setmealQueryDTO.getPageSize();
+        int start = (page - 1) * pageSize;
+
+        setmealQueryDTO.setPage(start);
+
+        Integer count = setmealMapper.count(setmealQueryDTO);
+        List<SetmealVO> list = setmealMapper.page(setmealQueryDTO);
+
+        return new PageVO<>(count, list);
     }
 }

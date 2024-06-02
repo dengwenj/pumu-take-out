@@ -3,13 +3,13 @@ package vip.dengwj.controller.admin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vip.dengwj.dto.SetmealDTO;
+import vip.dengwj.dto.SetmealQueryDTO;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.SetmealService;
+import vip.dengwj.vo.PageVO;
+import vip.dengwj.vo.SetmealVO;
 
 @RestController
 @RequestMapping("/admin/setmeal")
@@ -23,5 +23,12 @@ public class SetmealController {
     public Result save(@RequestBody SetmealDTO setmealDTO) {
         setmealService.save(setmealDTO);
         return Result.success();
+    }
+
+    @ApiOperation("分页查询套餐")
+    @GetMapping("/page")
+    public Result<PageVO<SetmealVO>> page(SetmealQueryDTO setmealQueryDTO) {
+        PageVO<SetmealVO> page = setmealService.page(setmealQueryDTO);
+        return Result.success(page);
     }
 }
