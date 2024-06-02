@@ -67,6 +67,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!--            Spring 操作 Redis 这个版本就是springboot 的版本-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

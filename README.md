@@ -189,6 +189,19 @@ exists sex
 -- 返回 key 所存储的值的类型 hash
 type student
 
--- 删除 key
+-- 删除 key，可以删除多个
 del name
 ```
+
+## Redis 的 java 客户端
+* Redis 的 java 客户端很多：
+* Jedis
+* Lettuce
+* Spring Data Redis
+* Spring Data Redis 是 Spring 的一部分，对 Redis 底层开发进行了高度封装
+
+## Spring Data Redis 使用方式
+* 1、导入 Spring Data Redis 的 maven 坐标
+* 2、配置 Redis 数据元
+* 3、编写配置类，创建 RedisTemplate 对象
+* 4、通过 RedisTemplate 对象操作 Redis
