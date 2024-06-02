@@ -174,3 +174,21 @@ zincrby zset1 1.1 a
 -- 移除一个或多个成员
 zrem zset1 a
 ```
+
+## 通用命令
+```redis
+-- 返回所以 key
+keys *
+
+-- 返回匹配到的 key
+keys s*
+
+-- 检查某个 key 是否存在
+exists sex
+
+-- 返回 key 所存储的值的类型 hash
+type student
+
+-- 删除 key
+del name
+```
