@@ -57,3 +57,22 @@
 * 3、列表 list：按照插入顺序排序，可以有重复元素，类似 java 中的 LinkedLink
 * 4、集合 set：无序集合，没有重复元素，类似 java 中的 HashSet
 * 5、有序集合 sorted set / zset：集合中每个元素关联一个分数(score)，根据分数升序排序，没有重复元素
+
+## 字符串操作命令
+* set key value：设置指定 key 的值
+* get key：获取指定 key 的值
+* setex key seconds value：设置指定 key 的值，并将 key 的过期时间设为 seconds 秒
+* setnx key value：只有在 key 不存在时设置 key 的值
+```redis
+set name pumu
+
+get name
+
+setex code 30 123456
+
+get code
+
+setnx sex 男
+
+get sex
+```
