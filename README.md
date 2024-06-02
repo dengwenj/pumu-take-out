@@ -102,3 +102,27 @@ hkeys student
 -- 获取 hash 表中所有值
 hvals student
 ```
+
+## 列表操作命令
+* Redis 列表是简单的字符串列表，按照插入顺序排序，常用命令：
+* lpush key value1 【value2】：将一个或多个值插入到列表头部
+* lrange key start stop：获取列表指定范围内的元素
+* rpop key：移除并获取列表最后一个元素
+* llen key：获取列表长度
+```redis
+-- 获取 hash 表中所有值
+hvals student
+
+-- 列表操作命令
+-- 插入
+lpush list 朴睦 李雷 韩梅梅
+
+-- 获取指定范围  lrange 0 -1 (0 到 -1 把所有的元素都返回)
+lrange list 0 1
+
+-- 移除并获取列表最后一个元素
+rpop list
+
+-- 获取长度
+llen list
+```
