@@ -26,4 +26,15 @@
     <select id="findBySetmealId" resultType="vip.dengwj.entity.SetmealDishEntity">
         select * from setmeal_dish where setmeal_id = #{setmealId}
     </select>
+
+<!--    根据套餐 id 获取数据包括图片-->
+    <select id="getSetmealDishVOBySetmealId" resultType="vip.dengwj.vo.SetmealDishVO">
+        select sd.copies,
+               sd.name,
+               d.description,
+               d.image
+        from setmeal_dish sd
+                 left join dish d on sd.dish_id = d.id
+        where sd.setmeal_id = #{setmealId}
+    </select>
 </mapper>

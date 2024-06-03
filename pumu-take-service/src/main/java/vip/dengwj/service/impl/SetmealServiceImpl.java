@@ -16,6 +16,7 @@ import vip.dengwj.mapper.SetmealDishMapper;
 import vip.dengwj.mapper.SetmealMapper;
 import vip.dengwj.service.SetmealService;
 import vip.dengwj.vo.PageVO;
+import vip.dengwj.vo.SetmealDishVO;
 import vip.dengwj.vo.SetmealVO;
 
 import java.util.ArrayList;
@@ -172,4 +173,13 @@ public class SetmealServiceImpl implements SetmealService {
     public List<SetmealEntity> getSetmealListByCategoryId(Long categoryId) {
         return setmealMapper.getSetmealListByCategoryId(categoryId);
     }
+
+    /**
+     * 根据套餐 id 查询包含的菜品
+     */
+    @Override
+    public List<SetmealDishVO> getDishLisSetmealId(Long setmealId) {
+        return setmealDishMapper.getSetmealDishVOBySetmealId(setmealId);
+    }
+
 }

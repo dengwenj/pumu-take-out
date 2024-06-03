@@ -4,6 +4,7 @@ import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealQueryDTO;
 import vip.dengwj.entity.SetmealEntity;
 import vip.dengwj.vo.PageVO;
+import vip.dengwj.vo.SetmealDishVO;
 import vip.dengwj.vo.SetmealVO;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface SetmealService {
 
     // 根据分类 id 查询套餐
     List<SetmealEntity> getSetmealListByCategoryId(Long categoryId);
+
+    // 根据套餐 id 查询包含的菜品
+    List<SetmealDishVO> getDishLisSetmealId(Long setmealId);
 }

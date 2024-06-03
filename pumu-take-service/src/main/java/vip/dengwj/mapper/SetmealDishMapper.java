@@ -2,6 +2,7 @@ package vip.dengwj.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import vip.dengwj.entity.SetmealDishEntity;
+import vip.dengwj.vo.SetmealDishVO;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface SetmealDishMapper {
 
     // 根据套餐 id 获取数据
     List<SetmealDishEntity> findBySetmealId(Long setmealId);
+
+    // 根据套餐 id 获取菜品包括菜品图片
+    List<SetmealDishVO> getSetmealDishVOBySetmealId(Long setmealId);
 }
