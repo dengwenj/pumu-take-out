@@ -1,11 +1,18 @@
 package vip.dengwj;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -176,5 +183,32 @@ class PumuTakeServiceApplicationTests {
 
         // 删除 key
         redisTemplate.delete("set2");
+    }
+
+    /**
+     * http client 测试 get 请求
+     */
+    @Test
+    public void testGet() throws IOException {
+        // 创建 http Client 对象
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+
+        // 创建 http 请求对象
+        HttpGet httpGet = new HttpGet("http://localhost:1209/user/shop/status");
+
+        // 发送请求获取结果
+        CloseableHttpResponse response = httpClient.execute(httpGet);
+
+        // 获取服务端返回的状态码
+        int statusCode = response.getStatusLine().getStatusCode();
+        System.out.println("statusCode: " + statusCode);
+
+        HttpEntity entity = response.getEntity();
+        String data = EntityUtils.toString(entity);
+        System.out.println("服务端返回的数据：" + data);
+
+        // 关闭资源
+        response.close();
+        httpClient.close();
     }
 }

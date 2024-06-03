@@ -205,3 +205,7 @@ del name
 * 2、配置 Redis 数据元
 * 3、编写配置类，创建 RedisTemplate 对象
 * 4、通过 RedisTemplate 对象操作 Redis
+
+## HttpClient
+* HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议
+* 

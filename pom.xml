@@ -29,6 +29,7 @@
         <mybatis-spring-boot-starter.version>2.3.0</mybatis-spring-boot-starter.version>
         <jjwt.version>0.9.1</jjwt.version>
         <knife4j-spring-boot-starter.version>3.0.2</knife4j-spring-boot-starter.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
 <!--    依赖，可继承-->
@@ -98,6 +99,13 @@
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
                 <version>2.3.3</version>
+            </dependency>
+
+<!--            http client-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
