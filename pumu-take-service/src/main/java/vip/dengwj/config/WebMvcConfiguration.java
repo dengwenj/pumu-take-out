@@ -17,6 +17,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import vip.dengwj.interceptor.JwtTokenAdminInterceptor;
 import vip.dengwj.json.JacksonObjectMapper;
+import vip.dengwj.utils.HttpClientUtil;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         // addPathPatterns 需要拦截那些 excludePathPatterns 不需要拦截那些
         registry.addInterceptor(jwtTokenAdminInterceptor)
             .addPathPatterns("/admin/**")
-            .excludePathPatterns("/admin/employee/login");
+            .excludePathPatterns("/login");
     }
 
     /**
@@ -78,6 +79,14 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
             .apis(RequestHandlerSelectors.basePackage("vip.dengwj.controller.user"))
             .paths(PathSelectors.any())
             .build();
+    }
+
+    /**
+     * http client
+     */
+    @Bean
+    public HttpClientUtil httpClientUtil() {
+        return new HttpClientUtil();
     }
 
     /**
