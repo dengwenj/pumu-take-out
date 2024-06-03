@@ -3,6 +3,7 @@ package vip.dengwj.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import vip.dengwj.entity.DishFlavorEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "菜品对象")
+@Builder
 public class DishDTO implements Serializable {
     @ApiModelProperty(required = true, value = "分类id")
     private Long categoryId;

@@ -26,4 +26,7 @@ public interface DishService {
 
     // 根据分类 id 查询菜品
     List<DishEntity> getDishByCategoryId(Long categoryId);
+
+    // 根据分类 id 查询菜品包括其菜品口味
+    List<DishDTO> getDishDTOByCategoryId(Long categoryId);
 }

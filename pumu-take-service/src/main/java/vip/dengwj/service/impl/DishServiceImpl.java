@@ -18,7 +18,7 @@ import vip.dengwj.service.DishService;
 import vip.dengwj.vo.DishVo;
 import vip.dengwj.vo.PageVO;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -153,5 +153,31 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<DishEntity> getDishByCategoryId(Long categoryId) {
         return dishMapper.getDishByCategoryId(categoryId);
+    }
+
+    /**
+     * 根据分类 id 查询菜品，包括其菜品口味
+     */
+    @Override
+    public List<DishDTO> getDishDTOByCategoryId(Long categoryId) {
+        List<DishEntity> dishList = dishMapper.getDishByCategoryId(categoryId);
+
+        List<DishDTO> dishDTOList = new ArrayList<>();
+        for (DishEntity dish : dishList) {
+            List<DishFlavorEntity> list = dishFlavorMapper.getListByDishId(dish.getId());
+            dishDTOList.add(
+                DishDTO.builder()
+                    .categoryId(dish.getCategoryId())
+                    .description(dish.getDescription())
+                    .flavors(list)
+                    .id(dish.getId())
+                    .image(dish.getImage())
+                    .name(dish.getName())
+                    .price(dish.getPrice())
+                    .status(dish.getStatus())
+                    .build()
+            );
+        }
+        return dishDTOList;
     }
 }
