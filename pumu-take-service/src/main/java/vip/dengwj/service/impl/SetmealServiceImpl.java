@@ -19,6 +19,7 @@ import vip.dengwj.vo.PageVO;
 import vip.dengwj.vo.SetmealVO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -162,5 +163,13 @@ public class SetmealServiceImpl implements SetmealService {
         setmealDTO.setSetmealDishDTOList(setmealDishDTOList);
 
         return setmealDTO;
+    }
+
+    /**
+     * 根据分类 id 查询套餐
+     */
+    @Override
+    public List<SetmealEntity> getSetmealListByCategoryId(Long categoryId) {
+        return setmealMapper.getSetmealListByCategoryId(categoryId);
     }
 }

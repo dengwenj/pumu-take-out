@@ -11,7 +11,7 @@ import vip.dengwj.service.SetmealService;
 import vip.dengwj.vo.PageVO;
 import vip.dengwj.vo.SetmealVO;
 
-@RestController
+@RestController("adminSetmealController")
 @RequestMapping("/admin/setmeal")
 @Api(tags = "套餐管理")
 public class SetmealController {

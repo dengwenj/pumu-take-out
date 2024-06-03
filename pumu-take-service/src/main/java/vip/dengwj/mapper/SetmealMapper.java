@@ -29,4 +29,7 @@ public interface SetmealMapper {
     // 更新套餐
     @AutoFill(InsertOrUpdate.UPDATE)
     void update(SetmealEntity setmealEntity);
+
+    // 根据分类 id 查询套餐
+    List<SetmealEntity> getSetmealListByCategoryId(Long categoryId);
 }

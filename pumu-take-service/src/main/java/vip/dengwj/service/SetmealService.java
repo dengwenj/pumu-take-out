@@ -2,8 +2,11 @@ package vip.dengwj.service;
 
 import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealQueryDTO;
+import vip.dengwj.entity.SetmealEntity;
 import vip.dengwj.vo.PageVO;
 import vip.dengwj.vo.SetmealVO;
+
+import java.util.List;
 
 public interface SetmealService {
     void save(SetmealDTO setmealDTO);
@@ -19,4 +22,7 @@ public interface SetmealService {
 
     // 根据 id 获取套餐
     SetmealDTO getSetmealById(Long id);
+
+    // 根据分类 id 查询套餐
+    List<SetmealEntity> getSetmealListByCategoryId(Long categoryId);
 }

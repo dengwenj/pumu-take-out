@@ -96,4 +96,9 @@
     <select id="getSetmealByIds" resultType="vip.dengwj.entity.SetmealEntity">
         select * from setmeal where id in (#{ids})
     </select>
+
+<!--    根据分类 id 查询套餐-->
+    <select id="getSetmealListByCategoryId" resultType="vip.dengwj.entity.SetmealEntity">
+        select * from setmeal where category_id = #{categoryId}
+    </select>
 </mapper>
