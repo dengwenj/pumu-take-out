@@ -33,15 +33,32 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        // /admin/shop/status
+        String requestURI = request.getRequestURI();
+        String[] split = requestURI.split("/");
+
+        String headerToken = "";
+        String secretKey = "";
+        String idField = "";
+        if (split[1].equals("user")) {
+            headerToken = jwtProperties.getUserTokenName();
+            secretKey = jwtProperties.getUserSecretKey();
+            idField = JWTConstant.USER_ID;
+        } else if (split[1].equals("admin")) {
+            headerToken = jwtProperties.getAdminTokenName();
+            secretKey = jwtProperties.getAdminSecretKey();
+            idField = JWTConstant.EMP_ID;
+        }
+
         //1、从请求头中获取令牌
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
+        String token = request.getHeader(headerToken);
 
         //2、校验令牌
         try {
-            Map<String, Object> map = JWTUtils.parseJWT(jwtProperties.getAdminSecretKey(), token);
-            Long empId = Long.valueOf(map.get(JWTConstant.EMP_ID).toString());
+            Map<String, Object> map = JWTUtils.parseJWT(secretKey, token);
+            Long id = Long.valueOf(map.get(idField).toString());
             // 放到当前线程的局部变量
-            BaseContext.set(empId);
+            BaseContext.set(id);
             //3、通过，放行
             return true;
         } catch (Exception ex) {

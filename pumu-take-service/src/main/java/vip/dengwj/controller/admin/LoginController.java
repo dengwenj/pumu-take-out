@@ -19,7 +19,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping("/login")
+    @PostMapping("/admin/login")
     @ApiOperation("登录")
     public Result<EmpLoginVO> login(@RequestBody EmpLoginDTO empLoginDTO) {
         log.info("用户名，{}", empLoginDTO);

@@ -14,4 +14,11 @@ public class JWTProperties {
     private String adminSecretKey;
     private Long adminTtl;
     private String adminTokenName;
+
+    /**
+     * 用户端生成的 jwt 令牌配置
+     */
+    private String userSecretKey;
+    private Long userTtl;
+    private String userTokenName;
 }
