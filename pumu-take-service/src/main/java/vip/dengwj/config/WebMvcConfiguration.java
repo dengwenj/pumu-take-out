@@ -47,17 +47,35 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @return
      */
     @Bean
-    public Docket docket() {
+    public Docket docketAdmin() {
         ApiInfo apiInfo = new ApiInfoBuilder()
             .title("朴睦外卖项目接口文档")
             .version("2.0")
             .description("朴睦外卖项目接口文档")
             .build();
         return new Docket(DocumentationType.SWAGGER_2)
+            .groupName("管理端接口")
             .apiInfo(apiInfo)
             .select()
             // 指定生成接口需要扫描的包
-            .apis(RequestHandlerSelectors.basePackage("vip.dengwj.controller"))
+            .apis(RequestHandlerSelectors.basePackage("vip.dengwj.controller.admin"))
+            .paths(PathSelectors.any())
+            .build();
+    }
+
+    @Bean
+    public Docket docketUser() {
+        ApiInfo apiInfo = new ApiInfoBuilder()
+            .title("朴睦外卖项目接口文档")
+            .version("2.0")
+            .description("朴睦外卖项目接口文档")
+            .build();
+        return new Docket(DocumentationType.SWAGGER_2)
+            .groupName("用户端接口")
+            .apiInfo(apiInfo)
+            .select()
+            // 指定生成接口需要扫描的包
+            .apis(RequestHandlerSelectors.basePackage("vip.dengwj.controller.user"))
             .paths(PathSelectors.any())
             .build();
     }
