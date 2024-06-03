@@ -16,7 +16,7 @@ import vip.dengwj.vo.PageVO;
 import java.util.List;
 
 @Slf4j
-@RestController
+@RestController("adminCategoryController")
 @Api(tags = "分类管理")
 @RequestMapping("/admin/category")
 public class CategoryController {

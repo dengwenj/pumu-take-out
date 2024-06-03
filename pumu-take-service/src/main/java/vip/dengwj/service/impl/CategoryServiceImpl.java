@@ -90,9 +90,9 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public List<CategoryEntity> getListByType(Integer type) {
-        if (type == null) {
-            throw new BaseException("分类类型为空");
-        }
+        //if (type == null) {
+        //    throw new BaseException("分类类型为空");
+        //}
         return categoryMapper.getListByType(type);
     }
 
