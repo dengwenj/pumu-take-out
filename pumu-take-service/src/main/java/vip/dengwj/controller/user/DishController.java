@@ -26,7 +26,7 @@ public class DishController {
     @ApiOperation("根据分类 id 查询菜品")
     @GetMapping("/list")
     public Result<List<DishDTO>> getDishByCategoryId(Long categoryId) {
-        String key = "dish_"  + categoryId;
+        String key = "dish_" + categoryId;
         // 先从 redis 里面查，有缓存从 redis 里拿
         List<DishDTO> dishDTOS = redisTemplate.opsForValue().get(key);
         if (dishDTOS != null && !dishDTOS.isEmpty()) {
