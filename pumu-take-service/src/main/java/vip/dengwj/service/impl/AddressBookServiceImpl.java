@@ -31,4 +31,12 @@ public class AddressBookServiceImpl implements AddressBookService {
     public List<AddressBookEntity> list() {
         return addressBookMapper.list();
     }
+
+    /**
+     * 根据 id 查询地址
+     */
+    @Override
+    public AddressBookEntity findById(Long id) {
+        return addressBookMapper.findById(id);
+    }
 }

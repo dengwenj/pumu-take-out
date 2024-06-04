@@ -30,4 +30,11 @@ public class AddressBookController {
         List<AddressBookEntity> list = addressBookService.list();
         return Result.success(list);
     }
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据 id 查询地址")
+    public Result<AddressBookEntity> findById(@PathVariable Long id) {
+        AddressBookEntity data = addressBookService.findById(id);
+        return Result.success(data);
+    }
 }

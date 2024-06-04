@@ -15,4 +15,11 @@
     <select id="list" resultType="vip.dengwj.entity.AddressBookEntity">
         select * from address_book
     </select>
+
+<!--    根据 id 查询地址-->
+    <select id="findById" resultType="vip.dengwj.entity.AddressBookEntity">
+        select *
+        from address_book
+        where id = #{id}
+    </select>
 </mapper>

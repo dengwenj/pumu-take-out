@@ -10,4 +10,6 @@ public interface AddressBookService {
 
     // 获取全部地址
     List<AddressBookEntity> list();
+
+    AddressBookEntity findById(Long id);
 }
