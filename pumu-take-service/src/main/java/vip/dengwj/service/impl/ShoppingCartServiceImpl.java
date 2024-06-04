@@ -14,7 +14,6 @@ import vip.dengwj.mapper.ShoppingCartMapper;
 import vip.dengwj.service.ShoppingCartService;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 
 @Service
