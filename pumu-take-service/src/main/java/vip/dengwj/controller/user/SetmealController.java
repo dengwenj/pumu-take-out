@@ -15,7 +15,7 @@ import vip.dengwj.vo.SetmealDishVO;
 import java.util.List;
 
 @RestController("userSetmealController")
-@Api("c端套餐相关接口")
+@Api(tags = "c端套餐相关接口")
 @RequestMapping("/user/setmeal")
 public class SetmealController {
     @Autowired
