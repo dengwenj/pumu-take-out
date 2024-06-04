@@ -11,4 +11,6 @@ public interface ShoppingCartService {
 
     // 查询购物车
     List<ShoppingCartEntity> list();
+
+    void clear();
 }

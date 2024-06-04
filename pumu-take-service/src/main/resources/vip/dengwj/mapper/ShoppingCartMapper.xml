@@ -23,6 +23,11 @@
         where id = #{id}
     </update>
 
+<!--    清空购物车-->
+    <delete id="clear">
+        delete from shopping_cart where user_id = #{userId}
+    </delete>
+
     <!--    根据商品的 dishId 或 setmealId 查询该条数据-->
     <select id="getShopping" resultType="vip.dengwj.entity.ShoppingCartEntity">
         select *

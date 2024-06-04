@@ -82,4 +82,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Long userId = BaseContext.get();
         return shoppingCartMapper.listByUserId(userId);
     }
+
+    /**
+     * 清空购物车
+     */
+    @Override
+    public void clear() {
+        Long userId = BaseContext.get();
+        shoppingCartMapper.clear(userId);
+    }
 }

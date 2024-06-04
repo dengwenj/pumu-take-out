@@ -18,4 +18,6 @@ public interface ShoppingCartMapper {
 
     // 查询购物车
     List<ShoppingCartEntity> listByUserId(Long userId);
+
+    void clear(Long userId);
 }
