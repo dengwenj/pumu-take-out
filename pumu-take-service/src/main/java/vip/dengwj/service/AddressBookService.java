@@ -16,4 +16,8 @@ public interface AddressBookService {
     void update(AddressBookEntity addressBookEntity);
 
     void delete(Long id);
+
+    AddressBookEntity findDefault();
+
+    void updateDefault(Long id);
 }

@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import vip.dengwj.dto.AddressBookDTO;
 import vip.dengwj.entity.AddressBookEntity;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.AddressBookService;
@@ -49,6 +50,20 @@ public class AddressBookController {
     @ApiOperation("根据 id 删除地址")
     public Result delete(Long id) {
         addressBookService.delete(id);
+        return Result.success();
+    }
+
+    @GetMapping("/default")
+    @ApiOperation("查询默认地址")
+    public Result<AddressBookEntity> findDefault() {
+        AddressBookEntity aDefault = addressBookService.findDefault();
+        return Result.success(aDefault);
+    }
+
+    @PutMapping("/default")
+    @ApiOperation("设置默认地址")
+    public Result updateDefault(@RequestBody AddressBookDTO addressBookDTO) {
+        addressBookService.updateDefault(addressBookDTO.getId());
         return Result.success();
     }
 }

@@ -71,4 +71,9 @@
         from address_book
         where id = #{id}
     </select>
+
+<!--    查询默认地址-->
+    <select id="findDefault" resultType="vip.dengwj.entity.AddressBookEntity">
+        select * from address_book where is_default = 1
+    </select>
 </mapper>
