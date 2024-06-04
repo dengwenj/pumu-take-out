@@ -10,4 +10,9 @@
         values (#{userId}, #{consignee}, #{sex}, #{phone}, #{provinceCode}, #{provinceName}, #{cityCode}, #{cityName},
                 #{districtCode}, #{districtName}, #{detail}, #{label}, #{isDefault})
     </insert>
+
+    <!--    获取全部地址-->
+    <select id="list" resultType="vip.dengwj.entity.AddressBookEntity">
+        select * from address_book
+    </select>
 </mapper>

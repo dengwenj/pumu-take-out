@@ -7,6 +7,8 @@ import vip.dengwj.entity.AddressBookEntity;
 import vip.dengwj.mapper.AddressBookMapper;
 import vip.dengwj.service.AddressBookService;
 
+import java.util.List;
+
 @Service
 public class AddressBookServiceImpl implements AddressBookService {
     @Autowired
@@ -20,5 +22,13 @@ public class AddressBookServiceImpl implements AddressBookService {
         addressBookEntity.setUserId(BaseContext.get());
         addressBookEntity.setIsDefault(0);
         addressBookMapper.insert(addressBookEntity);
+    }
+
+    /**
+     * 获取全部地址
+     */
+    @Override
+    public List<AddressBookEntity> list() {
+        return addressBookMapper.list();
     }
 }
