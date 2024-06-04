@@ -3,6 +3,8 @@ package vip.dengwj.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import vip.dengwj.entity.ShoppingCartEntity;
 
+import java.util.List;
+
 @Mapper
 public interface ShoppingCartMapper {
     // 添加购物车
@@ -13,4 +15,7 @@ public interface ShoppingCartMapper {
 
     // 获取商品
     ShoppingCartEntity getShopping(ShoppingCartEntity shoppingCartEntity);
+
+    // 查询购物车
+    List<ShoppingCartEntity> listByUserId(Long userId);
 }

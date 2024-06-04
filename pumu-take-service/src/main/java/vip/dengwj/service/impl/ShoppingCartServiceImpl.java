@@ -14,6 +14,8 @@ import vip.dengwj.mapper.ShoppingCartMapper;
 import vip.dengwj.service.ShoppingCartService;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -70,5 +72,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCartEntity.setImage(image);
         shoppingCartEntity.setNumber(1);
         shoppingCartMapper.insert(shoppingCartEntity);
+    }
+
+    /**
+     * 查询购物车
+     */
+    @Override
+    public List<ShoppingCartEntity> list() {
+        Long userId = BaseContext.get();
+        return shoppingCartMapper.listByUserId(userId);
     }
 }

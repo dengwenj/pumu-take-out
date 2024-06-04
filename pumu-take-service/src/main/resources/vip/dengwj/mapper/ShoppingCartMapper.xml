@@ -42,4 +42,9 @@
             </if>
         </where>
     </select>
+
+<!--    查询购物车-->
+    <select id="listByUserId" resultType="vip.dengwj.entity.ShoppingCartEntity">
+        select * from shopping_cart where user_id = #{userId}
+    </select>
 </mapper>

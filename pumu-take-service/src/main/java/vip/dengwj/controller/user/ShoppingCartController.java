@@ -3,13 +3,13 @@ package vip.dengwj.controller.user;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vip.dengwj.dto.ShoppingCartDTO;
+import vip.dengwj.entity.ShoppingCartEntity;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.ShoppingCartService;
+
+import java.util.List;
 
 @RestController
 @Api(tags = "购物车相关接口")
@@ -23,5 +23,12 @@ public class ShoppingCartController {
     public Result insert(@RequestBody ShoppingCartDTO shoppingCartDTO) {
         shoppingCartService.insert(shoppingCartDTO);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("查询购物车")
+    public Result<List<ShoppingCartEntity>> list() {
+        List<ShoppingCartEntity> list = shoppingCartService.list();
+        return Result.success(list);
     }
 }
