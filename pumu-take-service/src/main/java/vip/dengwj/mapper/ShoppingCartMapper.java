@@ -20,4 +20,7 @@ public interface ShoppingCartMapper {
     List<ShoppingCartEntity> listByUserId(Long userId);
 
     void clear(Long userId);
+
+    // 删除该条数据
+    void delete(ShoppingCartEntity shoppingCartEntity);
 }

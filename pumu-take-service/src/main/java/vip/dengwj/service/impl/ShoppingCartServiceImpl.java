@@ -91,4 +91,31 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Long userId = BaseContext.get();
         shoppingCartMapper.clear(userId);
     }
+
+    /**
+     * 减少商品
+     */
+    @Override
+    public void sub(ShoppingCartDTO shoppingCartDTO) {
+        // 减少商品小于等于 0 个时，要把这个商品删除掉
+        Long userId = BaseContext.get();
+        ShoppingCartEntity shoppingCartEntity = new ShoppingCartEntity();
+        BeanUtils.copyProperties(shoppingCartDTO, shoppingCartEntity);
+        shoppingCartEntity.setUserId(userId);
+
+        ShoppingCartEntity shopping = shoppingCartMapper.getShopping(shoppingCartEntity);
+        if (shopping != null) {
+            int number = shopping.getNumber() - 1;
+
+            // 删除
+            if (number <= 0) {
+                shoppingCartMapper.delete(shopping);
+                return;
+            }
+
+            // 更新
+            shopping.setNumber(number);
+            shoppingCartMapper.update(shopping);
+        }
+    }
 }

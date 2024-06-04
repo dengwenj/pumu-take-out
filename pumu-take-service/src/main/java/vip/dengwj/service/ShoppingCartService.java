@@ -13,4 +13,7 @@ public interface ShoppingCartService {
     List<ShoppingCartEntity> list();
 
     void clear();
+
+    // 减少商品
+    void sub(ShoppingCartDTO shoppingCartDTO);
 }
