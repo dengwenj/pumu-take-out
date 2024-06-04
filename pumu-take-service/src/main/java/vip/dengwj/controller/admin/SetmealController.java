@@ -3,6 +3,8 @@ package vip.dengwj.controller.admin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.web.bind.annotation.*;
 import vip.dengwj.dto.SetmealDTO;
 import vip.dengwj.dto.SetmealQueryDTO;
@@ -20,6 +22,7 @@ public class SetmealController {
 
     @ApiOperation("新增套餐")
     @PostMapping
+    @CachePut(cacheNames = "setmealCache", key = "#setmealDTO.categoryId")
     public Result save(@RequestBody SetmealDTO setmealDTO) {
         setmealService.save(setmealDTO);
         return Result.success();
@@ -34,6 +37,7 @@ public class SetmealController {
 
     @ApiOperation("删除套餐")
     @DeleteMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result deleteBatch(String ids) {
         setmealService.deleteBatch(ids);
         return Result.success();
@@ -48,6 +52,7 @@ public class SetmealController {
 
     @ApiOperation("更新套餐")
     @PutMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result update(@RequestBody SetmealDTO setmealDTO) {
         setmealService.update(setmealDTO);
         return Result.success();

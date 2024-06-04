@@ -3,6 +3,7 @@ package vip.dengwj.controller.user;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class SetmealController {
 
     @GetMapping("/list")
     @ApiOperation("根据分类 id 查询套餐")
+    @Cacheable(cacheNames = "setmealCache", key = "#categoryId")
     public Result getSetmealByCategoryId(Long categoryId) {
         List<SetmealEntity> data = setmealService.getSetmealListByCategoryId(categoryId);
         return Result.success(data);

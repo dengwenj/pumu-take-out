@@ -218,6 +218,12 @@ del name
 
 ## 常用注解
 * @EnableCaching：开启缓存注解功能，通常加在启动类上
-* @Cacheable：在方法执行前先查询缓存中是否有数据，如果有数据，则直接返回缓存数据，如果没有缓存数据，调用方法并将方法返回值放到缓存中
+* @Cacheable：在方法执行前先查询缓存中是否有数据，如果有数据，则直接返回缓存数据，如果没有缓存数据，调用方法并将方法返回值放到缓存中。会有一个代理对象 
 * @CachePut：将方法的返回值放到缓存中
 * @CacheEvict：将一条或多条数据从缓存中删除
+
+## @CachePut
+* @CachePut(cacheNames = "userCache", key = "#user.id") 如果使用 Spring Cache 缓存数据，key 的生成：userCache::1 
+* @Cacheable(cacheNames = "userCache", key = "#id")
+* @CacheEvict(cacheNames = "userCache", key = "#id")
+* @CacheEvict(cacheNames = "userCache", allEntries = true)

@@ -35,7 +35,6 @@ public class AutoFillAspect {
         // 获取到这个方法上的注解
         AutoFill annotation = signature.getMethod().getAnnotation(AutoFill.class);
         InsertOrUpdate value = annotation.value();
-
         // 获取方法的属性
         Object[] args = joinPoint.getArgs();
 
