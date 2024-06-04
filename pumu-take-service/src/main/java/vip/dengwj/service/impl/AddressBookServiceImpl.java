@@ -30,7 +30,7 @@ public class AddressBookServiceImpl implements AddressBookService {
      */
     @Override
     public List<AddressBookEntity> list() {
-        return addressBookMapper.list();
+        return addressBookMapper.list(BaseContext.get());
     }
 
     /**
@@ -62,7 +62,7 @@ public class AddressBookServiceImpl implements AddressBookService {
      */
     @Override
     public AddressBookEntity findDefault() {
-        return addressBookMapper.findDefault();
+        return addressBookMapper.findDefault(BaseContext.get());
     }
 
     /**

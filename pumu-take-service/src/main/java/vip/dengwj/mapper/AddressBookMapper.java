@@ -10,7 +10,7 @@ public interface AddressBookMapper {
     void insert(AddressBookEntity addressBookEntity);
 
     // 获取全部地址
-    List<AddressBookEntity> list();
+    List<AddressBookEntity> list(Long userId);
 
     AddressBookEntity findById(Long id);
 
@@ -18,5 +18,5 @@ public interface AddressBookMapper {
 
     void delete(Long id);
 
-    AddressBookEntity findDefault();
+    AddressBookEntity findDefault(Long userId);
 }

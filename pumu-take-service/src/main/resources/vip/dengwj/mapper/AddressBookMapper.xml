@@ -62,7 +62,7 @@
 
     <!--    获取全部地址-->
     <select id="list" resultType="vip.dengwj.entity.AddressBookEntity">
-        select * from address_book
+        select * from address_book where user_id = #{userId}
     </select>
 
 <!--    根据 id 查询地址-->
@@ -74,6 +74,6 @@
 
 <!--    查询默认地址-->
     <select id="findDefault" resultType="vip.dengwj.entity.AddressBookEntity">
-        select * from address_book where is_default = 1
+        select * from address_book where is_default = 1 and user_id = #{userId}
     </select>
 </mapper>
