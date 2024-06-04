@@ -55,6 +55,11 @@
         where id = #{id}
     </update>
 
+<!--    根据 id 删除地址-->
+    <delete id="delete">
+        delete from address_book where id = #{id}
+    </delete>
+
     <!--    获取全部地址-->
     <select id="list" resultType="vip.dengwj.entity.AddressBookEntity">
         select * from address_book

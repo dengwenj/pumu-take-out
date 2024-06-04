@@ -44,4 +44,11 @@ public class AddressBookController {
         addressBookService.update(addressBookEntity);
         return Result.success();
     }
+
+    @DeleteMapping
+    @ApiOperation("根据 id 删除地址")
+    public Result delete(Long id) {
+        addressBookService.delete(id);
+        return Result.success();
+    }
 }
