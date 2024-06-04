@@ -208,4 +208,16 @@ del name
 
 ## HttpClient
 * HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议
-* 
+
+## Spring Cache
+* Spring Cache 是一个框架，实现了基于注解的缓存功能，只需要简单的加一个注解，就能实现缓存功能
+* Spring Cache 提供了一层抽象，底层可以切换不同的缓存实现，例如：
+* EHCache
+* Caffeine
+* Redis
+
+## 常用注解
+* @EnableCaching：开启缓存注解功能，通常加在启动类上
+* @Cacheable：在方法执行前先查询缓存中是否有数据，如果有数据，则直接返回缓存数据，如果没有缓存数据，调用方法并将方法返回值放到缓存中
+* @CachePut：将方法的返回值放到缓存中
+* @CacheEvict：将一条或多条数据从缓存中删除

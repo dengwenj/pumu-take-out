@@ -31,7 +31,7 @@ public class DishController {
     public Result save(@RequestBody DishDTO dishDTO) {
         dishService.saveWithFlavor(dishDTO);
 
-        clearCatch("dish_" + dishDTO.getCategoryId());
+        clearCache("dish_" + dishDTO.getCategoryId());
         return Result.success();
     }
 
@@ -47,7 +47,7 @@ public class DishController {
     public Result delete(@RequestParam String ids) {
         dishService.deleteBatch(ids);
 
-        clearCatch("dish_*");
+        clearCache("dish_*");
         return Result.success();
     }
 
@@ -63,7 +63,7 @@ public class DishController {
     public Result update(@RequestBody DishDTO dishDTO) {
         dishService.update(dishDTO);
 
-        clearCatch("dish_*");
+        clearCache("dish_*");
         return Result.success();
     }
 
@@ -72,7 +72,7 @@ public class DishController {
     public Result updateStatus(@PathVariable Integer status, @PathVariable Long id) {
         dishService.startOrStop(status, id);
 
-        clearCatch("dish_*");
+        clearCache("dish_*");
         return Result.success();
     }
 
@@ -83,7 +83,7 @@ public class DishController {
         return Result.success(data);
     }
 
-    private void clearCatch(String pattern) {
+    private void clearCache(String pattern) {
         Set keys = redisTemplate.keys(pattern);
         redisTemplate.delete(keys);
     }
