@@ -37,4 +37,11 @@ public class AddressBookController {
         AddressBookEntity data = addressBookService.findById(id);
         return Result.success(data);
     }
+
+    @PutMapping
+    @ApiOperation("根据 id 修改地址")
+    public Result update(@RequestBody AddressBookEntity addressBookEntity) {
+        addressBookService.update(addressBookEntity);
+        return Result.success();
+    }
 }

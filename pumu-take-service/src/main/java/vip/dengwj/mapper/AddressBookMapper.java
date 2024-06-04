@@ -13,4 +13,6 @@ public interface AddressBookMapper {
     List<AddressBookEntity> list();
 
     AddressBookEntity findById(Long id);
+
+    void update(AddressBookEntity addressBookEntity);
 }

@@ -39,4 +39,12 @@ public class AddressBookServiceImpl implements AddressBookService {
     public AddressBookEntity findById(Long id) {
         return addressBookMapper.findById(id);
     }
+
+    /**
+     * 根据 id 修改地址
+     */
+    @Override
+    public void update(AddressBookEntity addressBookEntity) {
+        addressBookMapper.update(addressBookEntity);
+    }
 }

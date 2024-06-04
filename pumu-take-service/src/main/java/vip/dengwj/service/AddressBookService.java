@@ -12,4 +12,6 @@ public interface AddressBookService {
     List<AddressBookEntity> list();
 
     AddressBookEntity findById(Long id);
+
+    void update(AddressBookEntity addressBookEntity);
 }
