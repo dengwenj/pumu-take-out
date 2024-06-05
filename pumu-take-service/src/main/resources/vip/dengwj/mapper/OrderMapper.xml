@@ -67,4 +67,9 @@
             </if>
         </where>
     </select>
+
+<!--    查询订单详情-->
+    <select id="getOrderById" resultType="vip.dengwj.entity.OrderEntity">
+        select * from orders where id = #{id}
+    </select>
 </mapper>

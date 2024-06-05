@@ -53,4 +53,11 @@ public class OrderController {
         PageVO<OrderEntity> data = orderService.page(page, pageSize, status);
         return Result.success(data);
     }
+
+    @GetMapping("/orderDetail/{id}")
+    @ApiOperation("查询订单详情")
+    public Result<OrderEntity> orderDetail(@PathVariable Long id) {
+        OrderEntity order = orderService.orderDetail(id);
+        return Result.success(order);
+    }
 }

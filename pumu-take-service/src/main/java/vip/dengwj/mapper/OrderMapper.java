@@ -27,4 +27,6 @@ public interface OrderMapper {
 
     // 获取总条数
     Integer count(Integer status);
+
+    OrderEntity getOrderById(Long id);
 }

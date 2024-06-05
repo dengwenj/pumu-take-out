@@ -162,4 +162,17 @@ public class OrderServiceImpl implements OrderService {
         }
         return new PageVO<>(count, list);
     }
+
+    /**
+     * 查询订单详情
+     */
+    @Override
+    public OrderEntity orderDetail(Long id) {
+        OrderEntity order = orderMapper.getOrderById(id);
+
+        List<OrderDetailEntity> orderDetail = orderDetailMapper.findByOrderId(order.getId());
+
+        order.setOrderDetailList(orderDetail);
+        return order;
+    }
 }

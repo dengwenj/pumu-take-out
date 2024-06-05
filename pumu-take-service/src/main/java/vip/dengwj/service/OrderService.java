@@ -24,4 +24,6 @@ public interface OrderService {
     void paySuccess(String outTradeNo);
 
     PageVO<OrderEntity> page(Integer page, Integer pageSize, Integer status);
+
+    OrderEntity orderDetail(Long id);
 }
