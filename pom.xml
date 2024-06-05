@@ -30,6 +30,8 @@
         <jjwt.version>0.9.1</jjwt.version>
         <knife4j-spring-boot-starter.version>3.0.2</knife4j-spring-boot-starter.version>
         <httpclient.version>4.5.13</httpclient.version>
+        <fastjson>1.2.76</fastjson>
+        <commons.lang>2.6</commons.lang>
     </properties>
 
 <!--    依赖，可继承-->
@@ -106,6 +108,25 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
+            </dependency>
+
+            <!--微信支付-->
+            <dependency>
+                <groupId>com.github.wechatpay-apiv3</groupId>
+                <artifactId>wechatpay-apache-httpclient</artifactId>
+                <version>0.4.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons.lang}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

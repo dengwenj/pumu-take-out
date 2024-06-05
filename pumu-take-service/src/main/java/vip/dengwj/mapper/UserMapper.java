@@ -10,4 +10,6 @@ public interface UserMapper {
 
     // 根据 openid 查询用户
     UserEntity getUserByOpenid(String openid);
+
+    UserEntity getById(Long userId);
 }

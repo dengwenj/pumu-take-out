@@ -2,6 +2,7 @@ package vip.dengwj.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class OrderEntity implements Serializable {
     /**
      * 订单状态 1待付款 2待接单 3已接单 4派送中 5已完成 6已取消

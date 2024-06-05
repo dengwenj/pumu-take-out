@@ -13,4 +13,7 @@
     <select id="getUserByOpenid" resultType="vip.dengwj.entity.UserEntity">
         select * from user where openid = #{openid}
     </select>
+    <select id="getById" resultType="vip.dengwj.entity.UserEntity">
+        select * from user where id = #{userId}
+    </select>
 </mapper>
