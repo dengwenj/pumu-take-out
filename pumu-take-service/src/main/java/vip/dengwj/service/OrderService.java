@@ -28,4 +28,7 @@ public interface OrderService {
     OrderEntity orderDetail(Long id);
 
     void cancelOrder(Long id);
+
+    // 再来一单
+    void repetition(Long id);
 }

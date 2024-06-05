@@ -10,6 +10,9 @@ public interface ShoppingCartMapper {
     // 添加购物车
     void insert(ShoppingCartEntity shoppingCartEntity);
 
+    // 批量添加到购物车
+    void insertBatch(List<ShoppingCartEntity> shoppingCartEntities);
+
     // 更新购物车
     void update(ShoppingCartEntity shoppingCartEntity);
 

@@ -206,4 +206,23 @@ public class OrderServiceImpl implements OrderService {
             throw new BaseException("已接单或派送中取消订单，需电话沟通商家");
         }
     }
+
+    /**
+     * 再来一单
+     */
+    @Override
+    public void repetition(Long id) {
+        // 再来一单就是将原订单中的商品重新加入到购物车中
+        List<OrderDetailEntity> orderDetailList = orderDetailMapper.findByOrderId(id);
+
+        List<ShoppingCartEntity> shoppingCartList = new ArrayList<>();
+        for (OrderDetailEntity orderDetail : orderDetailList) {
+            ShoppingCartEntity shoppingCart = new ShoppingCartEntity();
+            BeanUtils.copyProperties(orderDetail, shoppingCart);
+            shoppingCart.setUserId(BaseContext.get());
+            shoppingCart.setCreateTime(LocalDateTime.now());
+            shoppingCartList.add(shoppingCart);
+        }
+        shoppingCartMapper.insertBatch(shoppingCartList);
+    }
 }
