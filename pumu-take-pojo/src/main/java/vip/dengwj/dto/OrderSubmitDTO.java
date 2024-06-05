@@ -1,5 +1,6 @@
 package vip.dengwj.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class OrderSubmitDTO implements Serializable {
     private String remark;
 
     @ApiModelProperty("预计送达时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime estimatedDeliveryTime;
 
     @ApiModelProperty("配送时间 1、立即送出，2、选择具体时间")

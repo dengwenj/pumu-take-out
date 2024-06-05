@@ -5,5 +5,5 @@ import vip.dengwj.entity.OrderEntity;
 
 @Mapper
 public interface OrderMapper {
-    OrderEntity save(OrderEntity orderEntity);
+    void inset(OrderEntity orderEntity);
 }

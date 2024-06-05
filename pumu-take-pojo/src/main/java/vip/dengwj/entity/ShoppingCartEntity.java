@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ShoppingCartEntity {
     @ApiModelProperty("主键id")
     private Long id;
