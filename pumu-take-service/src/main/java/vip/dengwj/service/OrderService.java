@@ -2,8 +2,10 @@ package vip.dengwj.service;
 
 import vip.dengwj.dto.OrderSubmitDTO;
 import vip.dengwj.dto.OrdersPaymentDTO;
+import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.vo.OrderPaymentVO;
 import vip.dengwj.vo.OrderSubmitVO;
+import vip.dengwj.vo.PageVO;
 
 public interface OrderService {
     OrderSubmitVO submit(OrderSubmitDTO orderSubmitDTO);
@@ -20,4 +22,6 @@ public interface OrderService {
      * @param outTradeNo
      */
     void paySuccess(String outTradeNo);
+
+    PageVO<OrderEntity> page(Integer page, Integer pageSize, Integer status);
 }

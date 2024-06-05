@@ -16,6 +16,7 @@ import vip.dengwj.service.OrderService;
 import vip.dengwj.utils.WeChatPayUtil;
 import vip.dengwj.vo.OrderPaymentVO;
 import vip.dengwj.vo.OrderSubmitVO;
+import vip.dengwj.vo.PageVO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -142,5 +143,23 @@ public class OrderServiceImpl implements OrderService {
             .build();
 
         orderMapper.update(orders);
+    }
+
+    /**
+     * 分页查询
+     */
+    @Override
+    public PageVO<OrderEntity> page(Integer page, Integer pageSize, Integer status) {
+        int start = (page - 1) * pageSize;
+        List<OrderEntity> list = orderMapper.page(start, pageSize, status);
+
+        // 总条数
+        Integer count = orderMapper.count(status);
+
+        // 根据订单号获取订单详情
+        for (OrderEntity order : list) {
+             order.setOrderDetailList(orderDetailMapper.findByOrderId(order.getId()));
+        }
+        return new PageVO<>(count, list);
     }
 }

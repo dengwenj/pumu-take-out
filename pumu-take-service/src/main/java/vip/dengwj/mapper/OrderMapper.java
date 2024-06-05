@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import vip.dengwj.entity.OrderEntity;
 
+import java.util.List;
+
 @Mapper
 public interface OrderMapper {
     void inset(OrderEntity orderEntity);
@@ -20,4 +22,9 @@ public interface OrderMapper {
      * @param orders
      */
     void update(OrderEntity orders);
+
+    List<OrderEntity> page(Integer page, Integer pageSize, Integer status);
+
+    // 获取总条数
+    Integer count(Integer status);
 }

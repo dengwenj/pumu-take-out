@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vip.dengwj.dto.OrderSubmitDTO;
 import vip.dengwj.dto.OrdersPaymentDTO;
+import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.OrderService;
 import vip.dengwj.vo.OrderPaymentVO;
 import vip.dengwj.vo.OrderSubmitVO;
+import vip.dengwj.vo.PageVO;
 
 @RestController
 @RequestMapping("/user/order")
@@ -43,5 +45,12 @@ public class OrderController {
         //业务处理，修改订单状态、来单提醒
         orderService.paySuccess(ordersPaymentDTO.getOrderNumber());
         return Result.success(new OrderPaymentVO());
+    }
+
+    @GetMapping("/historyOrders")
+    @ApiOperation("历史订单")
+    public Result<PageVO<OrderEntity>> page(Integer page, Integer pageSize, Integer status) {
+        PageVO<OrderEntity> data = orderService.page(page, pageSize, status);
+        return Result.success(data);
     }
 }

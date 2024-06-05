@@ -44,4 +44,27 @@
         </set>
         where id = #{id}
     </update>
+
+<!--    分页查询-->
+    <select id="page" resultType="vip.dengwj.entity.OrderEntity">
+        select *
+        from orders
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        limit #{page}, #{pageSize}
+    </select>
+
+<!--   获取总条数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+        from orders
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -10,4 +10,8 @@
             (#{item.name}, #{item.image}, #{item.orderId}, #{item.dishId}, #{item.setmealId}, #{item.dishFlavor}, #{item.number}, #{item.amount})
         </foreach>
     </insert>
+
+    <select id="findByOrderId" resultType="vip.dengwj.entity.OrderDetailEntity">
+        select * from order_detail where order_id = #{orderId}
+    </select>
 </mapper>

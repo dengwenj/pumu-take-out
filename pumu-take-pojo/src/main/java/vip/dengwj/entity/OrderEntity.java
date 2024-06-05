@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -100,4 +101,7 @@ public class OrderEntity implements Serializable {
 
     @ApiModelProperty("餐具数量状态，1.按餐量提供，0.选择具体数量")
     private Integer tablewareStatus;
+
+    @ApiModelProperty("订单详情实体")
+    private List<OrderDetailEntity> orderDetailList;
 }
