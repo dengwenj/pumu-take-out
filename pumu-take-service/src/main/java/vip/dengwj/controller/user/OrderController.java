@@ -60,4 +60,11 @@ public class OrderController {
         OrderEntity order = orderService.orderDetail(id);
         return Result.success(order);
     }
+
+    @PutMapping("/cancel/{id}")
+    @ApiOperation("取消订单")
+    public Result cancelOrder(@PathVariable Long id) {
+        orderService.cancelOrder(id);
+        return Result.success();
+    }
 }

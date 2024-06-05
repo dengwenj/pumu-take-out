@@ -26,4 +26,6 @@ public interface OrderService {
     PageVO<OrderEntity> page(Integer page, Integer pageSize, Integer status);
 
     OrderEntity orderDetail(Long id);
+
+    void cancelOrder(Long id);
 }

@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -174,5 +175,35 @@ public class OrderServiceImpl implements OrderService {
 
         order.setOrderDetailList(orderDetail);
         return order;
+    }
+
+    /**
+     * 取消订单
+     */
+    @Override
+    public void cancelOrder(Long id) {
+        OrderEntity order = orderMapper.getOrderById(id);
+
+        // 待支付和待接单状态下，用户可直接取消订单
+        if (
+            Objects.equals(order.getStatus(), OrderEntity.PENDING_PAYMENT)
+                || Objects.equals(order.getStatus(), OrderEntity.TO_BE_CONFIRMED)
+        ) {
+            order.setStatus(OrderEntity.CANCELLED);
+            orderMapper.update(order);
+
+            // 如果在待接单状态下取消订单，需要给用户退款
+            if (Objects.equals(order.getStatus(), OrderEntity.TO_BE_CONFIRMED)) {
+                System.out.println("接单状态下取消订单，需要给用户退款");
+            }
+        }
+
+        // 商家已接单状态下，用户取消订单需电话沟通商家。派送中状态下，用户取消订单需电话沟通商家
+        if (
+            order.getStatus().equals(OrderEntity.CONFIRMED)
+                || order.getStatus().equals(OrderEntity.DELIVERY_IN_PROGRESS)
+        ) {
+            throw new BaseException("已接单或派送中取消订单，需电话沟通商家");
+        }
     }
 }
