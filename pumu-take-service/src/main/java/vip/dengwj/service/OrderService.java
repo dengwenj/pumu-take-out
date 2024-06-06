@@ -47,4 +47,7 @@ public interface OrderService {
 
     // 取消订单
     void adminCancel(OrderCancelDTO orderCancelDTO);
+
+    // 派送订单
+    void adminDelivery(Long id);
 }

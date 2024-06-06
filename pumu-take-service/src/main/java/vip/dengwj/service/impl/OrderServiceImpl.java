@@ -305,11 +305,28 @@ public class OrderServiceImpl implements OrderService {
         // 商家取消订单时需要指定取消原因
         order.setStatus(OrderEntity.CANCELLED);
         order.setCancelReason(orderCancelDTO.getCancelReason());
+        order.setCancelTime(LocalDateTime.now());
         // 商家取消订单时，如果用户已经完成了支付，需要为用户退款
         if (order.getPayStatus().equals(OrderEntity.PAID)) {
             order.setPayStatus(OrderEntity.REFUND);
             System.out.println("退款给用户");
         }
+        orderMapper.update(order);
+    }
+
+    /**
+     * 派送订单
+     */
+    @Override
+    public void adminDelivery(Long id) {
+        OrderEntity order = orderMapper.getOrderById(id);
+        if (!order.getStatus().equals(OrderEntity.CONFIRMED)) {
+            throw new BaseException("只有状态为“待派送”的订单可以执行派送订单操作");
+        }
+
+        // 派送订单其实就是将订单状态修改为“派送中”
+        order.setStatus(OrderEntity.DELIVERY_IN_PROGRESS);
+        order.setDeliveryTime(LocalDateTime.now());
         orderMapper.update(order);
     }
 }
