@@ -2,10 +2,8 @@ package vip.dengwj.controller.admin;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import vip.dengwj.dto.OrderConfirmDTO;
 import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.entity.OrderQueryEntity;
@@ -42,5 +40,12 @@ public class OrderController {
     public Result<OrderEntity> details(@PathVariable Long id) {
         OrderEntity order = orderService.orderDetail(id);
         return Result.success(order);
+    }
+
+    @PutMapping("/confirm")
+    @ApiOperation("接单")
+    public Result confirm(@RequestBody OrderConfirmDTO orderConfirmDTO) {
+        orderService.confirm(orderConfirmDTO.getId());
+        return Result.success();
     }
 }

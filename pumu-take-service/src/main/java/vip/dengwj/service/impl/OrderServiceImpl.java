@@ -258,4 +258,17 @@ public class OrderServiceImpl implements OrderService {
         Integer toBeConfirmed = orderMapper.toBeConfirmed(OrderEntity.TO_BE_CONFIRMED);
         return new OrderStatusVO(confirmed, deliveryInProgress, toBeConfirmed);
     }
+
+    /**
+     * 接单
+     */
+    @Override
+    public void confirm(Long id) {
+        // 商家接单其实就是将订单的状态修改为“已接单”
+        OrderEntity order = OrderEntity.builder()
+            .id(id)
+            .status(OrderEntity.CONFIRMED)
+            .build();
+        orderMapper.update(order);
+    }
 }

@@ -40,4 +40,7 @@ public interface OrderService {
 
     // 各个状态的订单数量统计
     OrderStatusVO statistics();
+
+    // 接单
+    void confirm(Long id);
 }
