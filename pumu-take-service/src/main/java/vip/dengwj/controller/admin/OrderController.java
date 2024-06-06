@@ -9,6 +9,7 @@ import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.entity.OrderQueryEntity;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.OrderService;
+import vip.dengwj.vo.OrderStatusVO;
 import vip.dengwj.vo.PageVO;
 
 import javax.annotation.Resource;
@@ -25,5 +26,12 @@ public class OrderController {
     public Result<PageVO<OrderQueryEntity>> adminPage(OrderQueryDTO orderQueryDTO) {
         PageVO<OrderQueryEntity> list = orderService.adminPage(orderQueryDTO);
         return Result.success(list);
+    }
+
+    @GetMapping("/statistics")
+    @ApiOperation("各个状态的订单数量统计")
+    public Result<OrderStatusVO> statistics() {
+        OrderStatusVO data = orderService.statistics();
+        return Result.success(data);
     }
 }

@@ -37,4 +37,13 @@ public interface OrderMapper {
 
     // pc 端查询总数
     Integer adminCount(OrderQueryDTO orderQueryDTO);
+
+    // 待派送
+    Integer confirmed(Integer confirmed);
+
+    // 派送中
+    Integer deliveryInProgress(Integer deliveryInProgress);
+
+    // 待接单
+    Integer toBeConfirmed(Integer toBeConfirmed);
 }

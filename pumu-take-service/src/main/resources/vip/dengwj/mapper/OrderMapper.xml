@@ -118,4 +118,19 @@
             </if>
         </where>
     </select>
+
+<!--    待派送-->
+    <select id="confirmed" resultType="java.lang.Integer">
+        select count(*) from orders where status = #{confirmed}
+    </select>
+
+<!--    派送中-->
+    <select id="deliveryInProgress" resultType="java.lang.Integer">
+        select count(*) from orders where status = #{deliveryInProgress}
+    </select>
+
+<!--    待接单-->
+    <select id="toBeConfirmed" resultType="java.lang.Integer">
+        select count(*) from orders where status = #{toBeConfirmed}
+    </select>
 </mapper>

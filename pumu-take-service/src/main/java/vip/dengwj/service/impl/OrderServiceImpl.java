@@ -16,6 +16,7 @@ import vip.dengwj.mapper.*;
 import vip.dengwj.service.OrderService;
 import vip.dengwj.utils.WeChatPayUtil;
 import vip.dengwj.vo.OrderPaymentVO;
+import vip.dengwj.vo.OrderStatusVO;
 import vip.dengwj.vo.OrderSubmitVO;
 import vip.dengwj.vo.PageVO;
 
@@ -242,5 +243,19 @@ public class OrderServiceImpl implements OrderService {
         Integer count = orderMapper.adminCount(orderQueryDTO);
 
         return new PageVO<>(count, orderList);
+    }
+
+    /**
+     * 各个状态的订单数量统计
+     */
+    @Override
+    public OrderStatusVO statistics() {
+        // 待派送
+        Integer confirmed = orderMapper.confirmed(OrderEntity.CONFIRMED);
+        // 派送中
+        Integer deliveryInProgress = orderMapper.deliveryInProgress(OrderEntity.DELIVERY_IN_PROGRESS);
+        // 待接单
+        Integer toBeConfirmed = orderMapper.toBeConfirmed(OrderEntity.TO_BE_CONFIRMED);
+        return new OrderStatusVO(confirmed, deliveryInProgress, toBeConfirmed);
     }
 }

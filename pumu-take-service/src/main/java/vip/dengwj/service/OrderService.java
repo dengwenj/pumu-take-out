@@ -6,6 +6,7 @@ import vip.dengwj.dto.OrdersPaymentDTO;
 import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.entity.OrderQueryEntity;
 import vip.dengwj.vo.OrderPaymentVO;
+import vip.dengwj.vo.OrderStatusVO;
 import vip.dengwj.vo.OrderSubmitVO;
 import vip.dengwj.vo.PageVO;
 
@@ -36,4 +37,7 @@ public interface OrderService {
 
     // pc 端分页查询
     PageVO<OrderQueryEntity> adminPage(OrderQueryDTO orderQueryDTO);
+
+    // 各个状态的订单数量统计
+    OrderStatusVO statistics();
 }
