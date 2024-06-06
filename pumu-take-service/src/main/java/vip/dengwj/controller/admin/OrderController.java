@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import vip.dengwj.dto.OrderConfirmDTO;
 import vip.dengwj.dto.OrderQueryDTO;
+import vip.dengwj.dto.OrderRejectionDTO;
 import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.entity.OrderQueryEntity;
 import vip.dengwj.result.Result;
@@ -46,6 +47,13 @@ public class OrderController {
     @ApiOperation("接单")
     public Result confirm(@RequestBody OrderConfirmDTO orderConfirmDTO) {
         orderService.confirm(orderConfirmDTO.getId());
+        return Result.success();
+    }
+
+    @PutMapping("/rejection")
+    @ApiOperation("拒单")
+    public Result rejection(@RequestBody OrderRejectionDTO orderRejectionDTO) {
+        orderService.rejection(orderRejectionDTO);
         return Result.success();
     }
 }

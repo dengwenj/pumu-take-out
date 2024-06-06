@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vip.dengwj.constant.MessageConstant;
 import vip.dengwj.context.BaseContext;
 import vip.dengwj.dto.OrderQueryDTO;
+import vip.dengwj.dto.OrderRejectionDTO;
 import vip.dengwj.dto.OrderSubmitDTO;
 import vip.dengwj.dto.OrdersPaymentDTO;
 import vip.dengwj.entity.*;
@@ -270,5 +271,27 @@ public class OrderServiceImpl implements OrderService {
             .status(OrderEntity.CONFIRMED)
             .build();
         orderMapper.update(order);
+    }
+
+    /**
+     * 拒单
+     */
+    @Override
+    public void rejection(OrderRejectionDTO orderRejectionDTO) {
+        // 只有订单处于“待接单”状态时可以执行拒单操作
+        OrderEntity order = orderMapper.getOrderById(orderRejectionDTO.getId());
+        if (!order.getStatus().equals(OrderEntity.TO_BE_CONFIRMED)) {
+            throw new BaseException("只有订单处于“待接单”状态时可以执行拒单操作");
+        }
+
+        // 商家拒单其实就是将订单状态修改为“已取消”，商家拒单时需要指定拒单原因
+        order.setStatus(OrderEntity.CANCELLED);
+        order.setRejectionReason(orderRejectionDTO.getRejectionReason());
+        orderMapper.update(order);
+
+        // 商家拒单时，如果用户已经完成了支付，需要为用户退款
+        if (order.getPayStatus().equals(OrderEntity.PAID)) {
+            System.out.println("退款给用户");
+        }
     }
 }

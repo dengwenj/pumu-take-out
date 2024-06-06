@@ -1,6 +1,7 @@
 package vip.dengwj.service;
 
 import vip.dengwj.dto.OrderQueryDTO;
+import vip.dengwj.dto.OrderRejectionDTO;
 import vip.dengwj.dto.OrderSubmitDTO;
 import vip.dengwj.dto.OrdersPaymentDTO;
 import vip.dengwj.entity.OrderEntity;
@@ -43,4 +44,7 @@ public interface OrderService {
 
     // 接单
     void confirm(Long id);
+
+    // 拒单
+    void rejection(OrderRejectionDTO orderRejectionDTO);
 }
