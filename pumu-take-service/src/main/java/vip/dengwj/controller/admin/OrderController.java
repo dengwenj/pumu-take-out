@@ -3,9 +3,11 @@ package vip.dengwj.controller.admin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vip.dengwj.dto.OrderQueryDTO;
+import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.entity.OrderQueryEntity;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.OrderService;
@@ -33,5 +35,12 @@ public class OrderController {
     public Result<OrderStatusVO> statistics() {
         OrderStatusVO data = orderService.statistics();
         return Result.success(data);
+    }
+
+    @GetMapping("/details/{id}")
+    @ApiOperation("查询订单详情")
+    public Result<OrderEntity> details(@PathVariable Long id) {
+        OrderEntity order = orderService.orderDetail(id);
+        return Result.success(order);
     }
 }
