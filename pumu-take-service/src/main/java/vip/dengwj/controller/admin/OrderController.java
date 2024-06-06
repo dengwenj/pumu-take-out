@@ -3,6 +3,7 @@ package vip.dengwj.controller.admin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import vip.dengwj.dto.OrderCancelDTO;
 import vip.dengwj.dto.OrderConfirmDTO;
 import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.dto.OrderRejectionDTO;
@@ -54,6 +55,13 @@ public class OrderController {
     @ApiOperation("拒单")
     public Result rejection(@RequestBody OrderRejectionDTO orderRejectionDTO) {
         orderService.rejection(orderRejectionDTO);
+        return Result.success();
+    }
+
+    @PutMapping("/cancel")
+    @ApiOperation("取消订单")
+    public Result adminCancel(@RequestBody OrderCancelDTO orderCancelDTO) {
+        orderService.adminCancel(orderCancelDTO);
         return Result.success();
     }
 }

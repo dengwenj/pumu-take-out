@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vip.dengwj.constant.MessageConstant;
 import vip.dengwj.context.BaseContext;
-import vip.dengwj.dto.OrderQueryDTO;
-import vip.dengwj.dto.OrderRejectionDTO;
-import vip.dengwj.dto.OrderSubmitDTO;
-import vip.dengwj.dto.OrdersPaymentDTO;
+import vip.dengwj.dto.*;
 import vip.dengwj.entity.*;
 import vip.dengwj.exception.BaseException;
 import vip.dengwj.mapper.*;
@@ -287,11 +284,32 @@ public class OrderServiceImpl implements OrderService {
         // 商家拒单其实就是将订单状态修改为“已取消”，商家拒单时需要指定拒单原因
         order.setStatus(OrderEntity.CANCELLED);
         order.setRejectionReason(orderRejectionDTO.getRejectionReason());
-        orderMapper.update(order);
 
         // 商家拒单时，如果用户已经完成了支付，需要为用户退款
         if (order.getPayStatus().equals(OrderEntity.PAID)) {
+            order.setPayStatus(OrderEntity.REFUND);
             System.out.println("退款给用户");
         }
+
+        orderMapper.update(order);
+    }
+
+    /**
+     * 取消订单
+     */
+    @Override
+    public void adminCancel(OrderCancelDTO orderCancelDTO) {
+        OrderEntity order = orderMapper.getOrderById(orderCancelDTO.getId());
+
+        // 取消订单其实就是将订单状态修改为“已取消”
+        // 商家取消订单时需要指定取消原因
+        order.setStatus(OrderEntity.CANCELLED);
+        order.setCancelReason(orderCancelDTO.getCancelReason());
+        // 商家取消订单时，如果用户已经完成了支付，需要为用户退款
+        if (order.getPayStatus().equals(OrderEntity.PAID)) {
+            order.setPayStatus(OrderEntity.REFUND);
+            System.out.println("退款给用户");
+        }
+        orderMapper.update(order);
     }
 }
