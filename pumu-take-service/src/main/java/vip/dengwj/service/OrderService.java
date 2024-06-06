@@ -50,4 +50,7 @@ public interface OrderService {
 
     // 派送订单
     void adminDelivery(Long id);
+
+    // 完成订单
+    void adminComplete(Long id);
 }

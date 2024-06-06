@@ -329,4 +329,19 @@ public class OrderServiceImpl implements OrderService {
         order.setDeliveryTime(LocalDateTime.now());
         orderMapper.update(order);
     }
+
+    /**
+     * 完成订单
+     */
+    @Override
+    public void adminComplete(Long id) {
+        // 完成订单其实就是将订单状态修改为“已完成”
+        OrderEntity order = orderMapper.getOrderById(id);
+        if (!order.getStatus().equals(OrderEntity.DELIVERY_IN_PROGRESS)) {
+            throw new BaseException("只有状态为“派送中”的订单可以执行订单完成操作");
+        }
+
+        order.setStatus(OrderEntity.COMPLETED);
+        orderMapper.update(order);
+    }
 }
