@@ -326,7 +326,6 @@ public class OrderServiceImpl implements OrderService {
 
         // 派送订单其实就是将订单状态修改为“派送中”
         order.setStatus(OrderEntity.DELIVERY_IN_PROGRESS);
-        order.setDeliveryTime(LocalDateTime.now());
         orderMapper.update(order);
     }
 
@@ -342,6 +341,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         order.setStatus(OrderEntity.COMPLETED);
+        order.setDeliveryTime(LocalDateTime.now());
         orderMapper.update(order);
     }
 }

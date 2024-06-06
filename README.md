@@ -227,3 +227,13 @@ del name
 * @Cacheable(cacheNames = "userCache", key = "#id")
 * @CacheEvict(cacheNames = "userCache", key = "#id")
 * @CacheEvict(cacheNames = "userCache", allEntries = true)
+
+## Spring Task
+* Spring Task 是 Spring 框架提供的任务调度工具，可以按照约定的时间自动执行某个代码逻辑
+* 作用：定时自动执行某段代码
+
+## cron 表达式
+* cron 表达式其实就是一个字符串，通过 cron 表达式可以定义任务触发的时间
+* 构成规则：分为6或7个域，由空格分隔开，每个域代表一个含义
+* 每个域的含义分别为：秒、分钟、小时、日、月、周、年(可选)
+* 2024年6月6日上午9点整，对应的 cron 表达式为：0 0 9 6 6 ? 2024
