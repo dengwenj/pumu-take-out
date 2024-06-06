@@ -6,6 +6,7 @@ import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.entity.OrderQueryEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -46,4 +47,7 @@ public interface OrderMapper {
 
     // 待接单
     Integer toBeConfirmed(Integer toBeConfirmed);
+
+    // 根据状态和下单时间获取
+    List<OrderEntity> getOrderByStatusAndOrderTime(Integer status, LocalDateTime orderTime);
 }

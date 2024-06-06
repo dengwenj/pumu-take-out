@@ -45,7 +45,7 @@
         where id = #{id}
     </update>
 
-<!--    分页查询-->
+    <!--    分页查询-->
     <select id="page" resultType="vip.dengwj.entity.OrderEntity">
         select *
         from orders
@@ -132,5 +132,9 @@
 <!--    待接单-->
     <select id="toBeConfirmed" resultType="java.lang.Integer">
         select count(*) from orders where status = #{toBeConfirmed}
+    </select>
+
+    <select id="getOrderByStatusAndOrderTime" resultType="vip.dengwj.entity.OrderEntity">
+        select * from orders where status = #{status} and order_time &lt; #{orderTime}
     </select>
 </mapper>

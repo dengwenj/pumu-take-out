@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MyTask {
     // 定时任务，每隔 5 秒触发一次
-    @Scheduled(cron = "0/5 * * * * ?")
-    public void executionTask() {
-        log.info("定时任务开始执行：{}", System.currentTimeMillis() );
-    }
+    //@Scheduled(cron = "0/5 * * * * ?")
+    //public void executionTask() {
+    //    log.info("定时任务开始执行：{}", System.currentTimeMillis() );
+    //}
 }
