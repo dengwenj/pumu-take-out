@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vip.dengwj.constant.MessageConstant;
 import vip.dengwj.context.BaseContext;
+import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.dto.OrderSubmitDTO;
 import vip.dengwj.dto.OrdersPaymentDTO;
 import vip.dengwj.entity.*;
@@ -224,5 +225,22 @@ public class OrderServiceImpl implements OrderService {
             shoppingCartList.add(shoppingCart);
         }
         shoppingCartMapper.insertBatch(shoppingCartList);
+    }
+
+    /**
+     * pc 端查询
+     */
+    @Override
+    public PageVO<OrderQueryEntity> adminPage(OrderQueryDTO orderQueryDTO) {
+        Integer page = orderQueryDTO.getPage();
+        Integer pageSize = orderQueryDTO.getPageSize();
+        int start = (page - 1) * pageSize;
+        orderQueryDTO.setPage(start);
+
+        List<OrderQueryEntity> orderList = orderMapper.adminPage(orderQueryDTO);
+
+        Integer count = orderMapper.adminCount(orderQueryDTO);
+
+        return new PageVO<>(count, orderList);
     }
 }

@@ -2,7 +2,9 @@ package vip.dengwj.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.entity.OrderEntity;
+import vip.dengwj.entity.OrderQueryEntity;
 
 import java.util.List;
 
@@ -29,4 +31,10 @@ public interface OrderMapper {
     Integer count(Integer status);
 
     OrderEntity getOrderById(Long id);
+
+    // pc 端分页查询
+    List<OrderQueryEntity> adminPage(OrderQueryDTO orderQueryDTO);
+
+    // pc 端查询总数
+    Integer adminCount(OrderQueryDTO orderQueryDTO);
 }

@@ -1,5 +1,6 @@
 package vip.dengwj.controller.user;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,10 @@ import vip.dengwj.vo.OrderPaymentVO;
 import vip.dengwj.vo.OrderSubmitVO;
 import vip.dengwj.vo.PageVO;
 
-@RestController
+@RestController("userOrderController")
 @RequestMapping("/user/order")
 @Slf4j
+@Api(tags = "c端订单相关接口")
 public class OrderController {
     @Autowired
     private OrderService orderService;

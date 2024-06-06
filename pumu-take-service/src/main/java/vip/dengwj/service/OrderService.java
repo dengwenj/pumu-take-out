@@ -1,8 +1,10 @@
 package vip.dengwj.service;
 
+import vip.dengwj.dto.OrderQueryDTO;
 import vip.dengwj.dto.OrderSubmitDTO;
 import vip.dengwj.dto.OrdersPaymentDTO;
 import vip.dengwj.entity.OrderEntity;
+import vip.dengwj.entity.OrderQueryEntity;
 import vip.dengwj.vo.OrderPaymentVO;
 import vip.dengwj.vo.OrderSubmitVO;
 import vip.dengwj.vo.PageVO;
@@ -31,4 +33,7 @@ public interface OrderService {
 
     // 再来一单
     void repetition(Long id);
+
+    // pc 端分页查询
+    PageVO<OrderQueryEntity> adminPage(OrderQueryDTO orderQueryDTO);
 }

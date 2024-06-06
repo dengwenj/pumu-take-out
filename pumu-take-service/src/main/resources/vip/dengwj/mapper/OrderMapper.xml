@@ -72,4 +72,50 @@
     <select id="getOrderById" resultType="vip.dengwj.entity.OrderEntity">
         select * from orders where id = #{id}
     </select>
+
+<!--    pc 端分页查询-->
+    <select id="adminPage" resultType="vip.dengwj.entity.OrderQueryEntity">
+        select o.*,
+               u.name userName,
+               a.detail addressDetail
+        from orders o
+                 left join user u on o.user_id = u.id
+                 left join address_book a on o.address_book_id = a.id
+        <where>
+            <if test="number != null and number != ''">
+                and number like concat('%', #{number}, '%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone like concat('%', #{phone}, '%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="beginTime != null and endTime != null">
+                and order_time between #{beginTime} and #{endTime}
+            </if>
+        </where>
+        order by order_time desc
+        limit #{page}, #{pageSize}
+    </select>
+
+    <!--    pc 查询总数-->
+    <select id="adminCount" resultType="java.lang.Integer">
+        select count(*)
+        from orders
+        <where>
+            <if test="number != null and number != ''">
+                and number like concat('%', #{number}, '%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone like concat('%', #{phone}, '%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="beginTime != null and endTime != null">
+                and order_time between #{beginTime} and #{endTime}
+            </if>
+        </where>
+    </select>
 </mapper>
