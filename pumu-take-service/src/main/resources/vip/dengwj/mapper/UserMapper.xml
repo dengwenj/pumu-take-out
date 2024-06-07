@@ -3,17 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vip.dengwj.mapper.UserMapper">
-<!--    新增用户-->
+    <!--    新增用户-->
     <insert id="inertUser" useGeneratedKeys="true" keyProperty="id">
         insert into user (openid, name, create_time)
         values (#{openid}, #{name}, #{createTime})
     </insert>
 
-<!--    根据 openid 查询用户-->
+    <!--    根据 openid 查询用户-->
     <select id="getUserByOpenid" resultType="vip.dengwj.entity.UserEntity">
-        select * from user where openid = #{openid}
+        select *
+        from user
+        where openid = #{openid}
     </select>
     <select id="getById" resultType="vip.dengwj.entity.UserEntity">
-        select * from user where id = #{userId}
+        select *
+        from user
+        where id = #{userId}
+    </select>
+
+    <!--    统计新增人数-->
+    <select id="getCountByCreateTime" resultType="java.lang.Long">
+        select count(*)
+        from user
+        where create_time between #{begin} and #{end}
+    </select>
+
+<!--    统计全部人数-->
+    <select id="getCountAll" resultType="java.lang.Long">
+        select count(*) from user where create_time &lt; #{end}
     </select>
 </mapper>
