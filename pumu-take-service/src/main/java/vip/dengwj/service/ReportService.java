@@ -1,6 +1,7 @@
 package vip.dengwj.service;
 
 import vip.dengwj.vo.OrderReportVO;
+import vip.dengwj.vo.SalesTop10ReportVO;
 import vip.dengwj.vo.TurnoverReportVO;
 import vip.dengwj.vo.UserReportVO;
 
@@ -12,4 +13,6 @@ public interface ReportService {
     UserReportVO getUserReport(LocalDate begin, LocalDate end);
 
     OrderReportVO getOrdersStatistics(LocalDate begin, LocalDate end);
+
+    SalesTop10ReportVO getTop10(LocalDate begin, LocalDate end);
 }

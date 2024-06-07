@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.ReportService;
 import vip.dengwj.vo.OrderReportVO;
+import vip.dengwj.vo.SalesTop10ReportVO;
 import vip.dengwj.vo.TurnoverReportVO;
 import vip.dengwj.vo.UserReportVO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @Api(tags = "数据统计相关接口")
@@ -47,5 +49,14 @@ public class ReportController {
         @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
     ) {
         return Result.success(reportService.getOrdersStatistics(begin, end));
+    }
+
+    @GetMapping("/top10")
+    @ApiOperation("查询销量排名top10接口")
+    public Result<SalesTop10ReportVO> top10(
+        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
+    ) {
+        return Result.success(reportService.getTop10(begin, end));
     }
 }

@@ -58,4 +58,7 @@ public interface OrderMapper {
 
     // 根据指定时间获取订单数量
     Integer getTotalByDate(LocalDateTime begin, LocalDateTime end, Integer status);
+
+    // 根据下单时间区间获取数据
+    List<OrderEntity> getDataByOrderTime(LocalDateTime begin, LocalDateTime end, Integer status);
 }
