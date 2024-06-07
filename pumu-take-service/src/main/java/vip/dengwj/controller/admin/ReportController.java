@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.ReportService;
+import vip.dengwj.vo.OrderReportVO;
 import vip.dengwj.vo.TurnoverReportVO;
 import vip.dengwj.vo.UserReportVO;
 
@@ -37,5 +38,14 @@ public class ReportController {
         @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
     ) {
         return Result.success(reportService.getUserReport(begin, end));
+    }
+
+    @GetMapping("/ordersStatistics")
+    @ApiOperation("订单统计接口")
+    public Result<OrderReportVO> ordersStatistics(
+        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
+    ) {
+        return Result.success(reportService.getOrdersStatistics(begin, end));
     }
 }

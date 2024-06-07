@@ -55,4 +55,7 @@ public interface OrderMapper {
     List<OrderEntity> getOrderByStatusAndOrderTime(Integer status, LocalDateTime orderTime);
 
     BigDecimal getSumByMap(Map<String, Object> map);
+
+    // 根据指定时间获取订单数量
+    Integer getTotalByDate(LocalDateTime begin, LocalDateTime end, Integer status);
 }

@@ -5,11 +5,13 @@ import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.mapper.OrderMapper;
 import vip.dengwj.mapper.UserMapper;
 import vip.dengwj.service.ReportService;
+import vip.dengwj.vo.OrderReportVO;
 import vip.dengwj.vo.TurnoverReportVO;
 import vip.dengwj.vo.UserReportVO;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -90,6 +92,57 @@ public class ReportServiceImpl implements ReportService {
             .dateList(strDate)
             .newUserList(strNewUser)
             .totalUserList(strTotalUsers)
+            .build();
+    }
+
+    /**
+     * 订单统计
+     */
+    @Override
+    public OrderReportVO getOrdersStatistics(LocalDate begin, LocalDate end) {
+        List<LocalDate> dateList = calcDate(begin, end);
+        String strDate = dateList.stream().map(LocalDate::toString).collect(Collectors.joining(","));
+
+        List<Integer> orderCountList = new ArrayList<>();
+        List<Integer> totalByDateStatusList = new ArrayList<>();
+        for (LocalDate localDate : dateList) {
+            LocalDateTime beginTime = LocalDateTime.of(localDate, LocalTime.MIN);
+            LocalDateTime endTime = LocalDateTime.of(localDate, LocalTime.MAX);
+
+            // 获取该时间区间内所有订单
+            Integer totalByDate = orderMapper.getTotalByDate(beginTime, endTime, null);
+            totalByDate = totalByDate == null ? 0 : totalByDate;
+            orderCountList.add(totalByDate);
+
+            // 获取该时间区间内有效订单
+            Integer totalByDateStatus = orderMapper.getTotalByDate(beginTime, endTime, OrderEntity.COMPLETED);
+            totalByDateStatus = totalByDateStatus == null ? 0 : totalByDateStatus;
+            totalByDateStatusList.add(totalByDateStatus);
+        }
+        String strOrderCount = orderCountList.stream().map(String::valueOf).collect(Collectors.joining(","));
+        String strTotalByDateStatus = totalByDateStatusList.stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        // orderCountList.stream().reduce(33, (res, item) -> res + item);
+        // orderCountList.stream().reduce((res, item) -> res + item);
+        Integer orderCount = orderCountList.stream().reduce(Integer::sum).get();
+        Integer validOrderCount = totalByDateStatusList.stream().reduce(Integer::sum).get();
+
+        // 有效率，保留2位小数
+        double r = 0.0;
+        // 防止除以 0 报错
+        if (orderCount != 0) {
+            double rate = (double) validOrderCount / (double) orderCount;
+            DecimalFormat df = new DecimalFormat("#.00");
+            r = Double.parseDouble(df.format(rate));
+        }
+
+        return OrderReportVO.builder()
+            .dateList(strDate)
+            .orderCountList(strOrderCount)
+            .validOrderCountList(strTotalByDateStatus)
+            .totalOrderCount(orderCount)
+            .validOrderCount(validOrderCount)
+            .orderCompletionRate(r)
             .build();
     }
 
