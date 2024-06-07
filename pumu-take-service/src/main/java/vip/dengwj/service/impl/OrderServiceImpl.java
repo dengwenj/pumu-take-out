@@ -17,6 +17,7 @@ import vip.dengwj.vo.OrderPaymentVO;
 import vip.dengwj.vo.OrderStatusVO;
 import vip.dengwj.vo.OrderSubmitVO;
 import vip.dengwj.vo.PageVO;
+import vip.dengwj.websocket.WebSocketServer;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -43,6 +44,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private WeChatPayUtil weChatPayUtil;
+
+    @Autowired
+    private WebSocketServer webSocketServer;
 
     /**
      * 提交订单
@@ -143,6 +147,7 @@ public class OrderServiceImpl implements OrderService {
             .checkoutTime(LocalDateTime.now())
             .build();
 
+        webSocketServer.sendToAllClient("订单来了" + orders.getId());
         orderMapper.update(orders);
     }
 
