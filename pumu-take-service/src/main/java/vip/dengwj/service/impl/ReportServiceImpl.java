@@ -1,6 +1,7 @@
 package vip.dengwj.service.impl;
 
 import org.springframework.stereotype.Service;
+import vip.dengwj.dto.GoodsSalesDTO;
 import vip.dengwj.entity.OrderDetailEntity;
 import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.mapper.*;
@@ -151,6 +152,23 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
+     * 销售前10，sql 版
+     */
+    @Override
+    public SalesTop10ReportVO getTop10(LocalDate begin, LocalDate end) {
+        LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
+        LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
+
+        List<GoodsSalesDTO> list = orderDetailMapper.getGoodsSalesTop10(beginTime, endTime, null);
+        String names = list.stream().map(GoodsSalesDTO::getName).collect(Collectors.joining(","));
+        String numbers = list.stream().map((item) -> item.getNumber() + "").collect(Collectors.joining(","));
+
+        return SalesTop10ReportVO.builder()
+            .numberList(numbers)
+            .nameList(names)
+            .build();
+    }
+    /**
      * 销售前十，这是用 java 写
      * 可以用 sql 写如下：
      * select od.name, sum(od.number) num
@@ -161,68 +179,68 @@ public class ReportServiceImpl implements ReportService {
      * order by num desc
      * limit 0, 10;
      */
-    @Override
-    public SalesTop10ReportVO getTop10(LocalDate begin, LocalDate end) {
-        LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
-        LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
-
-        List<OrderEntity> orderList = orderMapper.getDataByOrderTime(beginTime, endTime, OrderEntity.COMPLETED);
-        // 所有的订单详情数据
-        List<OrderDetailEntity> orderDetailList = new ArrayList<>();
-
-        for (OrderEntity order : orderList) {
-            List<OrderDetailEntity> orderDetails = orderDetailMapper.findByOrderId(order.getId());
-
-            orderDetailList.addAll(orderDetails);
-        }
-
-        List<Map<String, Object>> mapList = new ArrayList<>();
-        for (OrderDetailEntity orderDetail : orderDetailList) {
-            // key 是商品名称，val 是商品数量
-            Map<String, Object> map = new HashMap<>();
-            String name = orderDetail.getName();
-            Integer number = orderDetail.getNumber();
-
-            int idx = -1;
-            // 集合里面是否存在该商品
-            for (int i = 0; i < mapList.size(); i++) {
-                Map<String, Object> item = mapList.get(i);
-                if (name.equals(item.get("goods"))) {
-                    idx = i;
-                    break;
-                }
-            }
-            // 不存在
-            if (idx == -1) {
-                // 商品名称和商品数量
-                map.put("goods", name);
-                map.put("number", number);
-                mapList.add(map);
-            } else {
-                Map<String, Object> map1 = mapList.get(idx);
-                Integer preNum = (Integer) map1.get("number");
-                map1.put("number", preNum + number);
-            }
-        }
-        System.out.println(mapList + "mapList");
-
-        // 排序，从大到小
-        List<Map<String, Object>> list = mapList.stream()
-            .sorted((a, b) -> (Integer) b.get("number") - (Integer) a.get("number"))
-            .collect(Collectors.toList());
-
-        // top 10
-        List<Map<String, Object>> finallyList = list.subList(0, Math.min(list.size(), 10));
-
-        // 最终整理为以逗号分隔的字符串
-        String goods = finallyList.stream().map((item) -> (String) item.get("goods")).collect(Collectors.joining(","));
-        String numbers = finallyList.stream().map((item) -> item.get("number") + "").collect(Collectors.joining(","));
-
-        return SalesTop10ReportVO.builder()
-            .nameList(goods)
-            .numberList(numbers)
-            .build();
-    }
+    //@Override
+    //public SalesTop10ReportVO getTop10(LocalDate begin, LocalDate end) {
+    //    LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
+    //    LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
+    //
+    //    List<OrderEntity> orderList = orderMapper.getDataByOrderTime(beginTime, endTime, OrderEntity.COMPLETED);
+    //    // 所有的订单详情数据
+    //    List<OrderDetailEntity> orderDetailList = new ArrayList<>();
+    //
+    //    for (OrderEntity order : orderList) {
+    //        List<OrderDetailEntity> orderDetails = orderDetailMapper.findByOrderId(order.getId());
+    //
+    //        orderDetailList.addAll(orderDetails);
+    //    }
+    //
+    //    List<Map<String, Object>> mapList = new ArrayList<>();
+    //    for (OrderDetailEntity orderDetail : orderDetailList) {
+    //        // key 是商品名称，val 是商品数量
+    //        Map<String, Object> map = new HashMap<>();
+    //        String name = orderDetail.getName();
+    //        Integer number = orderDetail.getNumber();
+    //
+    //        int idx = -1;
+    //        // 集合里面是否存在该商品
+    //        for (int i = 0; i < mapList.size(); i++) {
+    //            Map<String, Object> item = mapList.get(i);
+    //            if (name.equals(item.get("goods"))) {
+    //                idx = i;
+    //                break;
+    //            }
+    //        }
+    //        // 不存在
+    //        if (idx == -1) {
+    //            // 商品名称和商品数量
+    //            map.put("goods", name);
+    //            map.put("number", number);
+    //            mapList.add(map);
+    //        } else {
+    //            Map<String, Object> map1 = mapList.get(idx);
+    //            Integer preNum = (Integer) map1.get("number");
+    //            map1.put("number", preNum + number);
+    //        }
+    //    }
+    //    System.out.println(mapList + "mapList");
+    //
+    //    // 排序，从大到小
+    //    List<Map<String, Object>> list = mapList.stream()
+    //        .sorted((a, b) -> (Integer) b.get("number") - (Integer) a.get("number"))
+    //        .collect(Collectors.toList());
+    //
+    //    // top 10
+    //    List<Map<String, Object>> finallyList = list.subList(0, Math.min(list.size(), 10));
+    //
+    //    // 最终整理为以逗号分隔的字符串
+    //    String goods = finallyList.stream().map((item) -> (String) item.get("goods")).collect(Collectors.joining(","));
+    //    String numbers = finallyList.stream().map((item) -> item.get("number") + "").collect(Collectors.joining(","));
+    //
+    //    return SalesTop10ReportVO.builder()
+    //        .nameList(goods)
+    //        .numberList(numbers)
+    //        .build();
+    //}
 
     /**
      * 知道开始日期，结束日期，计算出该区间的全部日期
