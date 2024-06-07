@@ -15,7 +15,7 @@ public class WebSocketTask {
     /**
      * 通过WebSocket每隔5秒向客户端发送消息
      */
-    //@Scheduled(cron = "0/3 * * * * ?")
+    @Scheduled(cron = "0/3 * * * * ?")
     public void sendMessageToClient() {
         System.out.println("ww");
         webSocketServer.sendToAllClient("大家好我叫小爱同学，我来自服务端：" + DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()));

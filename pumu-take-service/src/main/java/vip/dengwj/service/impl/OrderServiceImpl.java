@@ -349,4 +349,18 @@ public class OrderServiceImpl implements OrderService {
         order.setDeliveryTime(LocalDateTime.now());
         orderMapper.update(order);
     }
+
+    /**
+     * 催单
+     */
+    @Override
+    public void reminder(Long id) {
+        OrderEntity order = orderMapper.getOrderById(id);
+        if (order == null) {
+            throw new BaseException("订单为空");
+        }
+
+        // 通过 WebSocket 向浏览器推送消息
+        webSocketServer.sendToAllClient("客户催单了，可以使用 json 字符串");
+    }
 }
