@@ -1,17 +1,23 @@
 package vip.dengwj.service.impl;
 
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import vip.dengwj.dto.GoodsSalesDTO;
 import vip.dengwj.entity.OrderDetailEntity;
 import vip.dengwj.entity.OrderEntity;
 import vip.dengwj.mapper.*;
 import vip.dengwj.service.ReportService;
-import vip.dengwj.vo.OrderReportVO;
-import vip.dengwj.vo.SalesTop10ReportVO;
-import vip.dengwj.vo.TurnoverReportVO;
-import vip.dengwj.vo.UserReportVO;
+import vip.dengwj.service.WorkSpaceService;
+import vip.dengwj.vo.*;
+import vip.dengwj.websocket.WebSocketServer;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -33,6 +39,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Resource
     private OrderDetailMapper orderDetailMapper;
+
+    @Resource
+    private WorkSpaceService workSpaceService;
 
     /**
      * 营业额统计接口
@@ -167,6 +176,53 @@ public class ReportServiceImpl implements ReportService {
             .numberList(numbers)
             .nameList(names)
             .build();
+    }
+
+    /**
+     * 数据导出
+     */
+    @Override
+    public void export(HttpServletResponse response) throws IOException {
+        // 查询进30天的
+        // 减30天
+        LocalDate dateBegin = LocalDate.now().minusDays(30);
+        LocalDate dateEnd = LocalDate.now().minusDays(1);
+        // 加一天
+        LocalDate localDate = dateBegin.plusDays(1);
+
+        // 获取数据
+        BusinessDataVO businessDataVO = workSpaceService.businessData();
+
+        // 根据模版创建 excel
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("vip/dengwj/template/运营数据报表模板.xlsx");
+        assert is != null;
+        XSSFWorkbook excel = new XSSFWorkbook(is);
+        XSSFSheet sheet = excel.getSheetAt(0);
+
+        // 获取第一行
+        XSSFRow row = sheet.getRow(1);
+        row.getCell(1).setCellValue("时间：" + LocalDateTime.now());
+
+        // 获取第四行
+        XSSFRow row4 = sheet.getRow(3);
+        row4.getCell(2).setCellValue(businessDataVO.getTurnover()); // 营业额
+        row4.getCell(4).setCellValue(businessDataVO.getOrderCompletionRate());
+        row4.getCell(6).setCellValue(businessDataVO.getNewUsers());
+
+        // 获取第五行
+        XSSFRow row5 = sheet.getRow(4);
+        row5.getCell(2).setCellValue(businessDataVO.getValidOrderCount());
+        row5.getCell(4).setCellValue(businessDataVO.getUnitPrice());
+
+        // 详情用循环
+
+        // 响应流给浏览器
+        ServletOutputStream outputStream = response.getOutputStream();
+        excel.write(outputStream);
+
+        // 关闭资源
+        outputStream.close();
+        excel.close();
     }
     /**
      * 销售前十，这是用 java 写

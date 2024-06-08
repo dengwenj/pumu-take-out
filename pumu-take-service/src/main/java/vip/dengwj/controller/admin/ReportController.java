@@ -14,6 +14,8 @@ import vip.dengwj.vo.SalesTop10ReportVO;
 import vip.dengwj.vo.TurnoverReportVO;
 import vip.dengwj.vo.UserReportVO;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -58,5 +60,11 @@ public class ReportController {
         @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
     ) {
         return Result.success(reportService.getTop10(begin, end));
+    }
+
+    @GetMapping("/export")
+    @ApiOperation("导出Excel报表接口")
+    public void export(HttpServletResponse response) throws IOException {
+        reportService.export(response);
     }
 }
