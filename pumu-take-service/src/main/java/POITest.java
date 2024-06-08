@@ -2,12 +2,14 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class POITest {
     public static void main(String[] args) throws IOException {
         write();
+        read();
     }
 
     public static void write() throws IOException {
@@ -33,5 +35,27 @@ public class POITest {
         FileOutputStream out = new FileOutputStream("/Users/dengwenjie/Desktop/test.xlsx");
         excel.write(out);
         out.close();
+        excel.close();
+    }
+
+    public static void read() throws IOException {
+        FileInputStream in = new FileInputStream("/Users/dengwenjie/Desktop/test.xlsx");
+        XSSFWorkbook excel = new XSSFWorkbook(in);
+
+        // 获取第一个页签
+        XSSFSheet sheet = excel.getSheetAt(0);
+        // 获取最后一样
+        int lastRowNum = sheet.getLastRowNum();
+
+        for (int i = 1; i <= lastRowNum; i++) {
+            XSSFRow row = sheet.getRow(i);
+            String stringCellValue = row.getCell(1).getStringCellValue();
+            String stringCellValue1 = row.getCell(2).getStringCellValue();
+            System.out.println("1:" + stringCellValue);
+            System.out.println("2:" + stringCellValue1);
+        }
+
+        in.close();
+        excel.close();
     }
 }
