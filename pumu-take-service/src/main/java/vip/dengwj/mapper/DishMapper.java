@@ -55,4 +55,7 @@ public interface DishMapper {
      * 根据分类 id 查询菜品
      */
     List<DishEntity> getDishByCategoryId(Long categoryId);
+
+    // 根据状态查询菜品数量
+    Integer getDishCountByStatus(Integer status);
 }

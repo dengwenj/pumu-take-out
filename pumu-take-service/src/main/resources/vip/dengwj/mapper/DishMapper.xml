@@ -122,6 +122,10 @@
         select * from dish where category_id = #{categoryId}
     </select>
 
+    <select id="getDishCountByStatus" resultType="java.lang.Integer">
+        select count(*) from dish where status = #{status}
+    </select>
+
     <!--    删除菜品-->
     <delete id="deleteBatch">
         delete

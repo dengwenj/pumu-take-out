@@ -32,4 +32,7 @@ public interface SetmealMapper {
 
     // 根据分类 id 查询套餐
     List<SetmealEntity> getSetmealListByCategoryId(Long categoryId);
+
+    // 根据状态查询套餐
+    Integer getSetmealCountByStatus(Integer status);
 }

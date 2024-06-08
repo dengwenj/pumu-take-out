@@ -1,11 +1,15 @@
 package vip.dengwj.service.impl;
 
 import org.springframework.stereotype.Service;
+import vip.dengwj.constant.StatusConstant;
 import vip.dengwj.entity.OrderEntity;
+import vip.dengwj.mapper.DishMapper;
 import vip.dengwj.mapper.OrderMapper;
+import vip.dengwj.mapper.SetmealMapper;
 import vip.dengwj.mapper.UserMapper;
 import vip.dengwj.service.WorkSpaceService;
 import vip.dengwj.vo.BusinessDataVO;
+import vip.dengwj.vo.OverviewDishesVO;
 import vip.dengwj.vo.OverviewOrdersVO;
 
 import javax.annotation.Resource;
@@ -21,6 +25,12 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 
     @Resource
     private OrderMapper orderMapper;
+
+    @Resource
+    private DishMapper dishMapper;
+
+    @Resource
+    private SetmealMapper setmealMapper;
 
     /**
      * 查询今日运营数据
@@ -89,6 +99,38 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
             .completedOrders(completedOrders)
             .deliveredOrders(deliveredOrders)
             .waitingOrders(waitingOrders)
+            .build();
+    }
+
+    /**
+     * 查询菜品总览
+     */
+    @Override
+    public OverviewDishesVO overviewDishes() {
+        // 已停售菜品数量
+        Integer discontinued = dishMapper.getDishCountByStatus(StatusConstant.DISABLE);
+
+        // 已启售
+        Integer sold = dishMapper.getDishCountByStatus(StatusConstant.ENABLE);
+
+        return OverviewDishesVO.builder()
+            .discontinued(discontinued)
+            .sold(sold)
+            .build();
+    }
+
+    /**
+     * 查询套餐总览
+     */
+    @Override
+    public OverviewDishesVO overviewSetmeals() {
+        Integer discontinued = setmealMapper.getSetmealCountByStatus(StatusConstant.DISABLE);
+
+        Integer sold = setmealMapper.getSetmealCountByStatus(StatusConstant.ENABLE);
+
+        return OverviewDishesVO.builder()
+            .discontinued(discontinued)
+            .sold(sold)
             .build();
     }
 }

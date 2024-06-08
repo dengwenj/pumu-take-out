@@ -101,4 +101,8 @@
     <select id="getSetmealListByCategoryId" resultType="vip.dengwj.entity.SetmealEntity">
         select * from setmeal where category_id = #{categoryId}
     </select>
+
+    <select id="getSetmealCountByStatus" resultType="java.lang.Integer">
+        select count(*) from setmeal where status = #{status}
+    </select>
 </mapper>

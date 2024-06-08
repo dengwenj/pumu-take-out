@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vip.dengwj.result.Result;
 import vip.dengwj.service.WorkSpaceService;
 import vip.dengwj.vo.BusinessDataVO;
+import vip.dengwj.vo.OverviewDishesVO;
 import vip.dengwj.vo.OverviewOrdersVO;
 
 import javax.annotation.Resource;
@@ -30,6 +31,20 @@ public class WorkSpaceController {
     @ApiOperation("查询订单管理数据")
     public Result<OverviewOrdersVO> overviewOrders() {
         OverviewOrdersVO data = workSpaceService.overviewOrders();
+        return Result.success(data);
+    }
+
+    @GetMapping("/overviewDishes")
+    @ApiOperation("查询菜品总览")
+    public Result<OverviewDishesVO> overviewDishes() {
+        OverviewDishesVO data = workSpaceService.overviewDishes();
+        return Result.success(data);
+    }
+
+    @GetMapping("/overviewSetmeals")
+    @ApiOperation("查询套餐总览")
+    public Result<OverviewDishesVO> overviewSetmeals() {
+        OverviewDishesVO data = workSpaceService.overviewSetmeals();
         return Result.success(data);
     }
 }
