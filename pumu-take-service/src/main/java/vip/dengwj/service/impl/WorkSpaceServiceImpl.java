@@ -6,6 +6,7 @@ import vip.dengwj.mapper.OrderMapper;
 import vip.dengwj.mapper.UserMapper;
 import vip.dengwj.service.WorkSpaceService;
 import vip.dengwj.vo.BusinessDataVO;
+import vip.dengwj.vo.OverviewOrdersVO;
 
 import javax.annotation.Resource;
 import java.text.DecimalFormat;
@@ -59,6 +60,35 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
             .orderCompletionRate(r)
             .turnover(turnover)
             .unitPrice(unitPrice)
+            .build();
+    }
+
+    /**
+     * 查询订单管理数据
+     */
+    @Override
+    public OverviewOrdersVO overviewOrders() {
+        // 全部订单数
+        Integer allOrders = orderMapper.count(null);
+
+        // 已取消数量
+        Integer cancelledOrders = orderMapper.count(OrderEntity.CANCELLED);
+
+        // 已完成
+        Integer completedOrders = orderMapper.count(OrderEntity.COMPLETED);
+
+        // 待派送
+        Integer deliveredOrders = orderMapper.count(OrderEntity.CONFIRMED);
+
+        // 待接单
+        Integer waitingOrders = orderMapper.count(OrderEntity.TO_BE_CONFIRMED);
+
+        return OverviewOrdersVO.builder()
+            .allOrders(allOrders)
+            .cancelledOrders(cancelledOrders)
+            .completedOrders(completedOrders)
+            .deliveredOrders(deliveredOrders)
+            .waitingOrders(waitingOrders)
             .build();
     }
 }
