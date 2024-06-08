@@ -51,6 +51,12 @@ public interface OrderMapper {
     // 待接单
     Integer toBeConfirmed(Integer toBeConfirmed);
 
+    // 已完成
+    Integer completed(Integer completed);
+
+    // 已完成订单的总金额
+    Integer completedAmount(Integer completed);
+
     // 根据状态和下单时间获取
     List<OrderEntity> getOrderByStatusAndOrderTime(Integer status, LocalDateTime orderTime);
 
